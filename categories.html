@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Categories — PN Kapoor Healthcare</title>
+<meta name="description" content="Six categories we manufacture. Skincare, haircare, bodycare, perfumes, tinted range, and professional. All under one roof in Mayapuri, Delhi." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PN Kapoor Healthcare">
+<meta property="og:title" content="Categories — PN Kapoor Healthcare">
+<meta property="og:description" content="Six categories we manufacture. Skincare, haircare, bodycare, perfumes, tinted range, and professional. All under one roof in Mayapuri, Delhi.">
+<meta property="og:image" content="images/hero-shelf-amber.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Categories — PN Kapoor Healthcare">
+<meta name="twitter:description" content="Six categories we manufacture. Skincare, haircare, bodycare, perfumes, tinted range, and professional. All under one roof in Mayapuri, Delhi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* ===== Page-specific styles ===== */
+
+/* Sticky side-nav for category jumping */
+.cat-page-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.cat-sidenav {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 20px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.cat-sidenav h6 {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.cat-sidenav a {
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--ink-soft);
+  transition: all .2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cat-sidenav a:hover { background: var(--cream-deep); color: var(--ink); }
+.cat-sidenav a .num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-faint);
+  transition: color .35s ease;
+}
+/* Scroll-spy active state — a filled highlight that glides between items */
+.cat-sidenav a.active {
+  background: var(--forest);
+  color: var(--cream);
+  font-weight: 600;
+}
+.cat-sidenav a.active:hover {
+  background: var(--forest);
+  color: var(--cream);
+}
+.cat-sidenav a.active .num {
+  color: var(--cream);
+  opacity: .8;
+}
+
+/* Category deep-dive section */
+.cat-section {
+  padding: clamp(60px, 8vw, 100px) 0;
+  border-bottom: 1px solid var(--line);
+}
+.cat-section:last-of-type { border-bottom: none; }
+
+.cat-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.cat-hero-text .eyebrow { margin-bottom: 14px; }
+.cat-hero-text .h1 .italic { color: var(--forest); }
+.cat-hero-text .lede { margin-top: 24px; }
+
+.cat-hero-visual {
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cat-hero-visual.sk { background: linear-gradient(135deg, #F5E5D5 0%, #E8C5A5 100%); }
+.cat-hero-visual.hc { background: linear-gradient(135deg, #E8D5B5 0%, #C9A875 100%); }
+.cat-hero-visual.bc { background: linear-gradient(135deg, #D5E5D5 0%, #95B595 100%); }
+.cat-hero-visual.pf { background: linear-gradient(135deg, #E5D5E5 0%, #C5A5C5 100%); }
+.cat-hero-visual.tn { background: linear-gradient(135deg, #F5D5C5 0%, #E5A595 100%); }
+.cat-hero-visual.pr { background: linear-gradient(135deg, #D5D5E5 0%, #9595B5 100%); }
+
+/* Subcategory grid */
+.subcat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+  margin-top: 50px;
+}
+.subcat {
+  padding: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all .25s;
+}
+.subcat:hover { transform: translateY(-2px); border-color: var(--ink); }
+.subcat-num {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  color: var(--brass);
+  text-transform: uppercase;
+}
+.subcat-name { font-family: var(--display); font-size: 22px; letter-spacing: -0.01em; }
+.subcat-desc { font-size: 13px; color: var(--ink-mute); line-height: 1.5; }
+.subcat-meta {
+  margin-top: auto;
+  padding-top: 14px;
+  display: flex;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Ingredients showcase */
+.cat-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 50px;
+}
+.detail-card {
+  background: var(--cream-deep);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+.detail-card h4 {
+  font-family: var(--display);
+  font-size: 26px;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.detail-card h4 .italic { color: var(--forest); }
+.detail-card .body-sm { margin-bottom: 18px; }
+.ing-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ing-tag {
+  padding: 6px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.ing-tag.feat {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+.packaging-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.pack-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 13.5px;
+  align-items: center;
+}
+.pack-item:last-child { border-bottom: none; }
+.pack-item span:first-child { color: var(--ink-soft); }
+.pack-item span:last-child {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: .06em;
+}
+
+/* MOQ + Timeline strip */
+.cat-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 40px;
+  padding: 24px;
+  background: var(--ink);
+  border-radius: var(--radius-lg);
+  color: var(--cream);
+}
+.stat-block { padding: 8px; }
+.stat-block .stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brass-soft);
+  margin-bottom: 8px;
+}
+.stat-block .stat-val {
+  font-family: var(--display);
+  font-size: 32px;
+  line-height: 1;
+  color: var(--cream);
+}
+.stat-block .stat-val .italic { color: var(--brass-soft); }
+.stat-block .stat-sub {
+  font-size: 12px;
+  color: #A8A293;
+  margin-top: 6px;
+}
+
+@media (max-width: 1000px) {
+  .cat-page-layout { grid-template-columns: 1fr; }
+  .cat-sidenav { position: relative; top: 0; flex-direction: row; flex-wrap: wrap; gap: 6px; }
+  .cat-sidenav h6 { flex-basis: 100%; }
+  .cat-sidenav a { padding: 8px 14px; }
+  .cat-hero { grid-template-columns: 1fr; }
+  .cat-details { grid-template-columns: 1fr; }
+  .cat-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .cat-stats { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-name">PN KAPOOR</span>
+      <span class="brand-sub">Healthcare · Est. 1996</span>
+    </a>
+    <div class="nav-links">
+      <a href="categories.html" class="active">Categories</a>
+      <a href="process.html">Process</a>
+      <a href="formulation-finder.html">Formulation Finder</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#contact" class="btn btn-ghost">Book a Tour</a>
+      <a href="index.html#contact" class="btn btn-primary">Get a Quote
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-grain"></div>
+  <div class="container page-hero-inner">
+    <div class="crumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span class="current">Categories</span>
+    </div>
+    <h1 class="h-display">Six categories.<br><span class="italic">One factory floor.</span></h1>
+    <p class="lede" style="margin-top:32px">
+      From a hyaluronic serum to a heat-activated hair mask, from a saffron room mist to a clinical-strength tinted SPF — every product we deliver is formulated, tested, and bottled under one roof in Mayapuri. No outsourcing. No catalogue tweaks. Everything bespoke to your brief.
+    </p>
+  </div>
+</section>
+
+<!-- CATEGORIES LAYOUT -->
+<div class="container">
+  <div class="cat-page-layout">
+
+    <!-- Side nav -->
+    <aside class="cat-sidenav">
+      <h6>Jump to category</h6>
+      <a href="#skincare"><span>Skincare</span><span class="num">01</span></a>
+      <a href="#haircare"><span>Haircare</span><span class="num">02</span></a>
+      <a href="#bodycare"><span>Bodycare</span><span class="num">03</span></a>
+      <a href="#perfume"><span>Perfumes</span><span class="num">04</span></a>
+      <a href="#tinted"><span>Tinted Range</span><span class="num">05</span></a>
+      <a href="#professional"><span>Professional</span><span class="num">06</span></a>
+    </aside>
+
+    <!-- Main content -->
+    <main>
+
+      <!-- ════════ SKINCARE ════════ -->
+      <section class="cat-section" id="skincare">
+        <div class="cat-hero">
+          <div class="cat-hero-text">
+            <div class="eyebrow">01 · Skincare</div>
+            <h2 class="h1">Serums &amp; <span class="italic">science.</span></h2>
+            <p class="lede">Our most-developed category. Active-led formulations across cleansing, treating, and protecting — built for brands who want to compete on efficacy, not just packaging.</p>
+          </div>
+          <div class="cat-hero-visual sk">
+            <svg width="160" height="200" viewBox="0 0 160 200" fill="none">
+              <ellipse cx="80" cy="30" rx="32" ry="12" fill="#16140E"/>
+              <rect x="50" y="32" width="60" height="14" fill="#2A2620"/>
+              <rect x="40" y="46" width="80" height="140" rx="10" fill="#FFFBF1" stroke="#16140E" stroke-width="1.5"/>
+              <rect x="52" y="78" width="56" height="80" rx="4" fill="rgba(184,82,64,.12)"/>
+              <text x="80" y="112" text-anchor="middle" font-family="Instrument Serif" font-size="14" fill="#16140E" font-style="italic">SERUM</text>
+              <line x1="52" y1="128" x2="108" y2="128" stroke="#B8893F" stroke-width="0.5"/>
+              <text x="80" y="142" text-anchor="middle" font-family="Geist Mono" font-size="6" fill="#5B554A" letter-spacing="0.5">NIACINAMIDE 10%</text>
+              <text x="80" y="155" text-anchor="middle" font-family="Geist Mono" font-size="6" fill="#5B554A" letter-spacing="0.5">+ ZINC PCA</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="subcat-grid">
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Serums</div>
+            <div class="subcat-desc">Niacinamide, vitamin C, retinol, peptides, hyaluronic acid, salicylic acid bases.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>12 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Moisturizers</div>
+            <div class="subcat-desc">Gel-creams, rich creams, ceramide-led formulas, ampoules. Day and night.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Cleansers</div>
+            <div class="subcat-desc">Foaming, oil-based, gel, micellar water. pH-balanced and sulphate-free options.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Sunscreens</div>
+            <div class="subcat-desc">Mineral and hybrid SPF 30–50. Tinted and non-tinted. PA+++ to PA++++.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>14 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Toners &amp; Mists</div>
+            <div class="subcat-desc">Hydrating, exfoliating (AHA/BHA), and balancing. Glass bottle or mist atomizer.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Masks</div>
+            <div class="subcat-desc">Clay, gel, peel-off, sheet, sleeping masks. Single-use or jarred formats.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>12 weeks</span></div>
+          </div>
+        </div>
+
+        <div class="cat-details">
+          <div class="detail-card">
+            <h4>Active <span class="italic">ingredients</span> we specialize in</h4>
+            <p class="body-sm">From the most demanded to the most novel — sourced from vetted global suppliers with COA.</p>
+            <div class="ing-list">
+              <span class="ing-tag feat">Niacinamide</span>
+              <span class="ing-tag feat">Vitamin C (LAA, SAP, EAA)</span>
+              <span class="ing-tag feat">Retinol &amp; Retinaldehyde</span>
+              <span class="ing-tag">Hyaluronic Acid</span>
+              <span class="ing-tag">Salicylic Acid</span>
+              <span class="ing-tag">Glycolic Acid</span>
+              <span class="ing-tag">Peptides (Matrixyl, Argireline)</span>
+              <span class="ing-tag">Ceramides</span>
+              <span class="ing-tag">Squalane</span>
+              <span class="ing-tag">Centella Asiatica</span>
+              <span class="ing-tag">Bakuchiol</span>
+              <span class="ing-tag">Azelaic Acid</span>
+              <span class="ing-tag">Tranexamic Acid</span>
+              <span class="ing-tag">Alpha Arbutin</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4>Packaging <span class="italic">options</span></h4>
+            <p class="body-sm">Choose from our vetted vendor network or bring your own. Pantone-matched, sample-tested.</p>
+            <div class="packaging-list">
+              <div class="pack-item"><span>Glass dropper bottle</span><span>15ML · 30ML · 50ML</span></div>
+              <div class="pack-item"><span>Airless pump bottle</span><span>30ML · 50ML · 100ML</span></div>
+              <div class="pack-item"><span>Pump bottle (PET / Glass)</span><span>50ML · 100ML · 200ML</span></div>
+              <div class="pack-item"><span>Squeeze tube (laminate / aluminum)</span><span>30ML · 50ML · 100ML</span></div>
+              <div class="pack-item"><span>Frosted jar with spatula</span><span>30G · 50G · 100G</span></div>
+              <div class="pack-item"><span>Sachet (single-use)</span><span>3ML · 5ML · 10ML</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-stats">
+          <div class="stat-block">
+            <div class="stat-label">Min Order</div>
+            <div class="stat-val"><span class="italic">500</span></div>
+            <div class="stat-sub">units per SKU</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Brief to Batch</div>
+            <div class="stat-val"><span class="italic">12</span> wks</div>
+            <div class="stat-sub">average turnaround</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Re-stock SLA</div>
+            <div class="stat-val"><span class="italic">3</span> wks</div>
+            <div class="stat-sub">post first batch</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Base formulas</div>
+            <div class="stat-val"><span class="italic">80+</span></div>
+            <div class="stat-sub">in our R&amp;D library</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ HAIRCARE ════════ -->
+      <section class="cat-section" id="haircare">
+        <div class="cat-hero">
+          <div class="cat-hero-text">
+            <div class="eyebrow">02 · Haircare</div>
+            <h2 class="h1">Roots to <span class="italic">tips.</span></h2>
+            <p class="lede">A full haircare line — without the half-dozen vendors. We formulate everything from low-foaming shampoos to deep-conditioning masks, plus scalp serums in the same lab as our face serums.</p>
+          </div>
+          <div class="cat-hero-visual hc">
+            <svg width="120" height="200" viewBox="0 0 120 200" fill="none">
+              <path d="M30 18 L90 18 L94 38 L26 38 Z" fill="#16140E"/>
+              <rect x="20" y="38" width="80" height="148" rx="8" fill="#FFFBF1" stroke="#16140E" stroke-width="1.5"/>
+              <rect x="32" y="70" width="56" height="80" rx="4" fill="rgba(184,137,63,.2)"/>
+              <text x="60" y="105" text-anchor="middle" font-family="Instrument Serif" font-size="13" fill="#16140E" font-style="italic">HAIR OIL</text>
+              <line x1="32" y1="118" x2="88" y2="118" stroke="#B8893F" stroke-width="0.5"/>
+              <text x="60" y="132" text-anchor="middle" font-family="Geist Mono" font-size="6" fill="#5B554A" letter-spacing="0.5">ARGAN + BHRINGRAJ</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="subcat-grid">
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Shampoos</div>
+            <div class="subcat-desc">Sulfate-free, low-foaming, color-safe, anti-dandruff, clarifying, scalp-care.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Conditioners</div>
+            <div class="subcat-desc">Lightweight, deep-moisture, leave-in. Silicone-optional formulations.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Hair Oils</div>
+            <div class="subcat-desc">Single-oil and Ayurvedic blends. Cold-pressed sourcing, lightweight to rich.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Scalp Serums</div>
+            <div class="subcat-desc">Anti-hair-fall, anti-dandruff, growth-stimulating. Caffeine, redensyl, peptides.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>14 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Hair Masks</div>
+            <div class="subcat-desc">Deep conditioning, keratin, protein-based. Jar or tube formats.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>12 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Styling</div>
+            <div class="subcat-desc">Hair sprays, mousses, gels, creams. Light hold to strong, matte to glossy.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>12 weeks</span></div>
+          </div>
+        </div>
+
+        <div class="cat-details">
+          <div class="detail-card">
+            <h4>Key <span class="italic">ingredients</span></h4>
+            <p class="body-sm">Ayurvedic heritage meets modern actives — both in our toolkit.</p>
+            <div class="ing-list">
+              <span class="ing-tag feat">Bhringraj</span>
+              <span class="ing-tag feat">Argan Oil</span>
+              <span class="ing-tag feat">Keratin (hydrolyzed)</span>
+              <span class="ing-tag">Redensyl</span>
+              <span class="ing-tag">Caffeine</span>
+              <span class="ing-tag">Biotin</span>
+              <span class="ing-tag">Onion Seed Extract</span>
+              <span class="ing-tag">Amla</span>
+              <span class="ing-tag">Curry Leaf</span>
+              <span class="ing-tag">Procapil</span>
+              <span class="ing-tag">Castor Oil</span>
+              <span class="ing-tag">Tea Tree Oil</span>
+              <span class="ing-tag">Coconut Oil</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4>Packaging <span class="italic">options</span></h4>
+            <p class="body-sm">From premium glass bottles to budget-friendly PET — your call.</p>
+            <div class="packaging-list">
+              <div class="pack-item"><span>Pump bottle (PET / HDPE)</span><span>100ML · 200ML · 300ML</span></div>
+              <div class="pack-item"><span>Flip-cap bottle</span><span>100ML · 200ML</span></div>
+              <div class="pack-item"><span>Glass bottle with dropper</span><span>30ML · 50ML · 100ML</span></div>
+              <div class="pack-item"><span>Jar with screw cap</span><span>100G · 200G · 500G</span></div>
+              <div class="pack-item"><span>Spray bottle</span><span>100ML · 200ML</span></div>
+              <div class="pack-item"><span>Tube</span><span>50ML · 100ML · 200ML</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-stats">
+          <div class="stat-block">
+            <div class="stat-label">Min Order</div>
+            <div class="stat-val"><span class="italic">500</span></div>
+            <div class="stat-sub">units per SKU</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Brief to Batch</div>
+            <div class="stat-val"><span class="italic">12</span> wks</div>
+            <div class="stat-sub">average turnaround</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Re-stock SLA</div>
+            <div class="stat-val"><span class="italic">3</span> wks</div>
+            <div class="stat-sub">post first batch</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Base formulas</div>
+            <div class="stat-val"><span class="italic">60+</span></div>
+            <div class="stat-sub">in our R&amp;D library</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ BODYCARE ════════ -->
+      <section class="cat-section" id="bodycare">
+        <div class="cat-hero">
+          <div class="cat-hero-text">
+            <div class="eyebrow">03 · Bodycare</div>
+            <h2 class="h1">Cream, balm, <span class="italic">butter.</span></h2>
+            <p class="lede">From whipped shea butter to sugar scrubs and bath salts. The category with the most texture variety — we'll help you choose the format that fits your brand story and price point.</p>
+          </div>
+          <div class="cat-hero-visual bc">
+            <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
+              <rect x="30" y="36" width="120" height="22" rx="4" fill="#16140E"/>
+              <rect x="36" y="58" width="108" height="110" rx="10" fill="#FFFBF1" stroke="#16140E" stroke-width="1.5"/>
+              <rect x="48" y="86" width="84" height="60" rx="4" fill="rgba(168,184,156,.3)"/>
+              <text x="90" y="112" text-anchor="middle" font-family="Instrument Serif" font-size="14" fill="#16140E" font-style="italic">BODY</text>
+              <text x="90" y="128" text-anchor="middle" font-family="Instrument Serif" font-size="14" fill="#16140E" font-style="italic">BUTTER</text>
+              <line x1="48" y1="136" x2="132" y2="136" stroke="#B8893F" stroke-width="0.5"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="subcat-grid">
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Body Lotions</div>
+            <div class="subcat-desc">Lightweight to rich. Daily-use formulas with niacinamide, urea, or AHA.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Body Butters</div>
+            <div class="subcat-desc">Raw shea, cocoa, mango butter. Whipped or solid. Optional essential oils.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Body Oils</div>
+            <div class="subcat-desc">Single-oil or blends. Dry oils, shimmer oils, fragrance-led oils.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Scrubs</div>
+            <div class="subcat-desc">Sugar, salt, coffee, walnut. Oil-based or wash-off formulations.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Soaps &amp; Body Wash</div>
+            <div class="subcat-desc">Cold-process bar soaps, syndet bars, liquid washes. Sulfate-free options.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Bath Soaks</div>
+            <div class="subcat-desc">Epsom + himalayan salt blends, milk baths, foaming soaks. Spa-style packaging.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+        </div>
+
+        <div class="cat-details">
+          <div class="detail-card">
+            <h4>Key <span class="italic">ingredients</span></h4>
+            <p class="body-sm">Rich emollients and nourishing butters — sourced cold-pressed and unrefined where it counts.</p>
+            <div class="ing-list">
+              <span class="ing-tag feat">Shea Butter</span>
+              <span class="ing-tag feat">Cocoa Butter</span>
+              <span class="ing-tag feat">Niacinamide</span>
+              <span class="ing-tag">Mango Butter</span>
+              <span class="ing-tag">Colloidal Oatmeal</span>
+              <span class="ing-tag">Urea</span>
+              <span class="ing-tag">Coconut Oil</span>
+              <span class="ing-tag">Almond Oil</span>
+              <span class="ing-tag">Vitamin E</span>
+              <span class="ing-tag">Glycerin</span>
+              <span class="ing-tag">Lactic Acid (AHA)</span>
+              <span class="ing-tag">Epsom Salt</span>
+              <span class="ing-tag">Coffee Extract</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4>Packaging <span class="italic">options</span></h4>
+            <p class="body-sm">From premium jars to value PET tubes — formats matched to texture and price point.</p>
+            <div class="packaging-list">
+              <div class="pack-item"><span>Squeeze tube (laminate / PE)</span><span>50ML · 100ML · 200ML</span></div>
+              <div class="pack-item"><span>Wide-mouth jar (PET / glass)</span><span>100G · 200G · 500G</span></div>
+              <div class="pack-item"><span>Pump bottle (PET / HDPE)</span><span>200ML · 300ML · 500ML</span></div>
+              <div class="pack-item"><span>Glass bottle with dropper</span><span>50ML · 100ML</span></div>
+              <div class="pack-item"><span>Wrapped bar (carton / box)</span><span>75G · 100G · 125G</span></div>
+              <div class="pack-item"><span>Resealable pouch / tub</span><span>200G · 500G · 1KG</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-stats">
+          <div class="stat-block">
+            <div class="stat-label">Min Order</div>
+            <div class="stat-val"><span class="italic">500</span></div>
+            <div class="stat-sub">units per SKU</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Brief to Batch</div>
+            <div class="stat-val"><span class="italic">12</span> wks</div>
+            <div class="stat-sub">average turnaround</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Re-stock SLA</div>
+            <div class="stat-val"><span class="italic">3</span> wks</div>
+            <div class="stat-sub">post first batch</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Base formulas</div>
+            <div class="stat-val"><span class="italic">50+</span></div>
+            <div class="stat-sub">in our R&amp;D library</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ PERFUME ════════ -->
+      <section class="cat-section" id="perfume">
+        <div class="cat-hero">
+          <div class="cat-hero-text">
+            <div class="eyebrow">04 · Perfumes</div>
+            <h2 class="h1">Signature <span class="italic">scents.</span></h2>
+            <p class="lede">Build a fragrance line with our in-house perfumer. We work with imported fragrance houses for the notes that matter — and source local botanicals for the ones that should feel like home.</p>
+          </div>
+          <div class="cat-hero-visual pf">
+            <svg width="140" height="200" viewBox="0 0 140 200" fill="none">
+              <rect x="50" y="24" width="40" height="30" rx="3" fill="#16140E"/>
+              <path d="M30 56 L110 56 L110 90 L120 180 Q120 188 112 188 L28 188 Q20 188 20 180 L30 90 Z" fill="#FFFBF1" stroke="#16140E" stroke-width="1.5"/>
+              <rect x="40" y="100" width="60" height="60" rx="4" fill="rgba(184,137,63,.18)"/>
+              <text x="70" y="128" text-anchor="middle" font-family="Instrument Serif" font-size="14" fill="#16140E" font-style="italic">EDP</text>
+              <line x1="40" y1="144" x2="100" y2="144" stroke="#B8893F" stroke-width="0.5"/>
+              <text x="70" y="158" text-anchor="middle" font-family="Geist Mono" font-size="6" fill="#5B554A" letter-spacing="0.5">SAFFRON · OUD · ROSE</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="subcat-grid">
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Eau de Parfum</div>
+            <div class="subcat-desc">15-30% fragrance oil concentration. Long-lasting. 50ML, 100ML formats.</div>
+            <div class="subcat-meta"><span>MOQ 250</span><span>16 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Eau de Toilette</div>
+            <div class="subcat-desc">5-15% concentration. Lighter, fresher. Daytime wear.</div>
+            <div class="subcat-meta"><span>MOQ 250</span><span>14 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Body Mists</div>
+            <div class="subcat-desc">1-4% concentration. Spritz throughout the day. Aluminum bottle, mist atomizer.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Roll-on Perfumes</div>
+            <div class="subcat-desc">Oil-based attars and roll-ons. Travel-friendly. Glass or aluminum.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Room Sprays</div>
+            <div class="subcat-desc">Home fragrance. Pillow mists, linen sprays, room fresheners.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Solid Perfumes</div>
+            <div class="subcat-desc">Beeswax or vegan base. Compact tins. Artisanal positioning.</div>
+            <div class="subcat-meta"><span>MOQ 500</span><span>10 weeks</span></div>
+          </div>
+        </div>
+
+        <div class="cat-details">
+          <div class="detail-card" style="grid-column: 1 / -1">
+            <h4>Build your <span class="italic">fragrance profile</span></h4>
+            <p class="body-sm">Our perfumer guides you through composition: top notes (first impression), heart notes (the personality), base notes (the dry-down). Below are families we work fluently with.</p>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-top:18px">
+              <div>
+                <div style="font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--brass); margin-bottom:8px">Floral</div>
+                <div class="ing-list">
+                  <span class="ing-tag">Rose</span><span class="ing-tag">Jasmine</span><span class="ing-tag">Neroli</span><span class="ing-tag">Tuberose</span><span class="ing-tag">Iris</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--brass); margin-bottom:8px">Citrus</div>
+                <div class="ing-list">
+                  <span class="ing-tag">Bergamot</span><span class="ing-tag">Lemon</span><span class="ing-tag">Grapefruit</span><span class="ing-tag">Yuzu</span><span class="ing-tag">Mandarin</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--brass); margin-bottom:8px">Woody</div>
+                <div class="ing-list">
+                  <span class="ing-tag">Sandalwood</span><span class="ing-tag">Cedar</span><span class="ing-tag">Oud</span><span class="ing-tag">Vetiver</span><span class="ing-tag">Patchouli</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--brass); margin-bottom:8px">Oriental</div>
+                <div class="ing-list">
+                  <span class="ing-tag">Saffron</span><span class="ing-tag">Cardamom</span><span class="ing-tag">Amber</span><span class="ing-tag">Vanilla</span><span class="ing-tag">Frankincense</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-stats">
+          <div class="stat-block">
+            <div class="stat-label">Min Order</div>
+            <div class="stat-val"><span class="italic">250</span></div>
+            <div class="stat-sub">units per SKU</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Brief to Batch</div>
+            <div class="stat-val"><span class="italic">12</span> wks</div>
+            <div class="stat-sub">average turnaround</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Re-stock SLA</div>
+            <div class="stat-val"><span class="italic">3</span> wks</div>
+            <div class="stat-sub">post first batch</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Note libraries</div>
+            <div class="stat-val"><span class="italic">40+</span></div>
+            <div class="stat-sub">in our R&amp;D library</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ TINTED ════════ -->
+      <section class="cat-section" id="tinted">
+        <div class="cat-hero">
+          <div class="cat-hero-text">
+            <div class="eyebrow">05 · Tinted Range</div>
+            <h2 class="h1">Color, but <span class="italic">care.</span></h2>
+            <p class="lede">The fastest-growing category in Indian beauty. Skincare-first decorative cosmetics — tinted serums, BB drops, lip-cheek tints. We formulate for Indian skin tones with 14 shade ranges available.</p>
+          </div>
+          <div class="cat-hero-visual tn">
+            <svg width="120" height="200" viewBox="0 0 120 200" fill="none">
+              <rect x="38" y="20" width="44" height="20" rx="3" fill="#16140E"/>
+              <path d="M34 40 L86 40 L86 60 Q86 64 82 64 L38 64 Q34 64 34 60 Z" fill="#2A2620"/>
+              <rect x="22" y="64" width="76" height="124" rx="8" fill="#FFFBF1" stroke="#16140E" stroke-width="1.5"/>
+              <ellipse cx="60" cy="130" rx="26" ry="36" fill="rgba(184,82,64,.5)"/>
+              <text x="60" y="134" text-anchor="middle" font-family="Instrument Serif" font-size="13" fill="#FFFBF1" font-style="italic">TINT</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="subcat-grid">
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Tinted Serums</div>
+            <div class="subcat-desc">Niacinamide + pigment. SPF optional. 6-14 shades developed per launch.</div>
+            <div class="subcat-meta"><span>MOQ 500/shade</span><span>14 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">BB &amp; CC Drops</div>
+            <div class="subcat-desc">Buildable coverage. Lightweight skincare-makeup hybrids. Hyaluronic-led.</div>
+            <div class="subcat-meta"><span>MOQ 500/shade</span><span>14 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Lip-Cheek Tints</div>
+            <div class="subcat-desc">Stain or cream finish. Skin-loving actives. Multi-use positioning.</div>
+            <div class="subcat-meta"><span>MOQ 500/shade</span><span>12 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Tinted Lip Balms</div>
+            <div class="subcat-desc">Hydrating + tinting. SPF optional. Bullet or jar formats.</div>
+            <div class="subcat-meta"><span>MOQ 500/shade</span><span>12 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Tinted Sunscreens</div>
+            <div class="subcat-desc">SPF 30-50 with sheer tint coverage. Mineral or hybrid filters.</div>
+            <div class="subcat-meta"><span>MOQ 500/shade</span><span>16 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Type</span>
+            <div class="subcat-name">Brow Tints</div>
+            <div class="subcat-desc">Gel or pomade formats. Skincare-grade castor + biotin. 4-6 shades.</div>
+            <div class="subcat-meta"><span>MOQ 500/shade</span><span>12 weeks</span></div>
+          </div>
+        </div>
+
+        <div class="cat-details">
+          <div class="detail-card">
+            <h4>Key <span class="italic">ingredients</span></h4>
+            <p class="body-sm">Skincare-grade pigments and actives — shade-matched and stability-tested for Indian skin tones.</p>
+            <div class="ing-list">
+              <span class="ing-tag feat">Iron Oxides</span>
+              <span class="ing-tag feat">Hyaluronic Acid</span>
+              <span class="ing-tag feat">SPF Actives (Mineral / Hybrid)</span>
+              <span class="ing-tag">Titanium Dioxide</span>
+              <span class="ing-tag">Squalane</span>
+              <span class="ing-tag">Niacinamide</span>
+              <span class="ing-tag">Mica</span>
+              <span class="ing-tag">Vitamin E</span>
+              <span class="ing-tag">Glycerin</span>
+              <span class="ing-tag">Jojoba Esters</span>
+              <span class="ing-tag">Castor Oil</span>
+              <span class="ing-tag">Plant-derived Waxes</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4>Packaging <span class="italic">options</span></h4>
+            <p class="body-sm">Precision dispensers for color payoff and dose control — sample-tested for each shade.</p>
+            <div class="packaging-list">
+              <div class="pack-item"><span>Airless pump bottle</span><span>15ML · 30ML · 50ML</span></div>
+              <div class="pack-item"><span>Glass dropper bottle</span><span>15ML · 30ML</span></div>
+              <div class="pack-item"><span>Compact with mirror</span><span>4G · 8G · 12G</span></div>
+              <div class="pack-item"><span>Doe-foot wand tube</span><span>5ML · 8ML · 10ML</span></div>
+              <div class="pack-item"><span>Tinted balm bullet</span><span>3.5G · 4.5G</span></div>
+              <div class="pack-item"><span>Squeeze tube (laminate)</span><span>15ML · 30ML · 50ML</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-stats">
+          <div class="stat-block">
+            <div class="stat-label">Min Order</div>
+            <div class="stat-val"><span class="italic">500</span></div>
+            <div class="stat-sub">units per shade</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Brief to Batch</div>
+            <div class="stat-val"><span class="italic">12</span> wks</div>
+            <div class="stat-sub">average turnaround</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Shade range</div>
+            <div class="stat-val"><span class="italic">14</span></div>
+            <div class="stat-sub">tones per launch</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Base formulas</div>
+            <div class="stat-val"><span class="italic">30+</span></div>
+            <div class="stat-sub">in our R&amp;D library</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ PROFESSIONAL ════════ -->
+      <section class="cat-section" id="professional">
+        <div class="cat-hero">
+          <div class="cat-hero-text">
+            <div class="eyebrow">06 · Professional</div>
+            <h2 class="h1">Salon <span class="italic">grade.</span></h2>
+            <p class="lede">B2B-only formulations for salons, aesthetic clinics, dermatology practices, and spa chains. Higher actives, larger format sizes, bulk pricing tiers, and pro-grade documentation.</p>
+          </div>
+          <div class="cat-hero-visual pr">
+            <svg width="180" height="200" viewBox="0 0 180 200" fill="none">
+              <rect x="20" y="32" width="140" height="22" rx="4" fill="#16140E"/>
+              <rect x="28" y="54" width="124" height="140" rx="8" fill="#FFFBF1" stroke="#16140E" stroke-width="1.5"/>
+              <rect x="40" y="80" width="100" height="100" rx="6" fill="rgba(149,149,181,.25)"/>
+              <text x="90" y="120" text-anchor="middle" font-family="Instrument Serif" font-size="16" fill="#16140E" font-style="italic">PRO</text>
+              <text x="90" y="142" text-anchor="middle" font-family="Geist Mono" font-size="8" fill="#16140E" letter-spacing="1">SALON USE ONLY</text>
+              <line x1="40" y1="156" x2="140" y2="156" stroke="#B8893F" stroke-width="0.5"/>
+              <text x="90" y="170" text-anchor="middle" font-family="Geist Mono" font-size="6" fill="#5B554A" letter-spacing="0.5">500ML</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="subcat-grid">
+          <div class="subcat">
+            <span class="subcat-num">— Use case</span>
+            <div class="subcat-name">Hair Salons</div>
+            <div class="subcat-desc">Pro shampoos, conditioners, masks, color-care. Bulk formats. Tier-based pricing.</div>
+            <div class="subcat-meta"><span>MOQ 200</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Use case</span>
+            <div class="subcat-name">Aesthetic Clinics</div>
+            <div class="subcat-desc">Higher-actives peels, post-procedure care, clinical serums. COA per batch.</div>
+            <div class="subcat-meta"><span>MOQ 200</span><span>14 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Use case</span>
+            <div class="subcat-name">Spa Chains</div>
+            <div class="subcat-desc">Massage oils, body wraps, scrubs, bath soaks. Branded for chain consistency.</div>
+            <div class="subcat-meta"><span>MOQ 200</span><span>10 weeks</span></div>
+          </div>
+          <div class="subcat">
+            <span class="subcat-num">— Use case</span>
+            <div class="subcat-name">Dermatology Practices</div>
+            <div class="subcat-desc">Doctor-formulated retail line. Patient handouts and patch-test protocols included.</div>
+            <div class="subcat-meta"><span>MOQ 200</span><span>14 weeks</span></div>
+          </div>
+        </div>
+
+        <div class="cat-details">
+          <div class="detail-card">
+            <h4>Pro-grade <span class="italic">actives</span></h4>
+            <p class="body-sm">Higher-strength clinical actives for in-clinic and professional retail — full COA and documentation per batch.</p>
+            <div class="ing-list">
+              <span class="ing-tag feat">Glycolic Acid</span>
+              <span class="ing-tag feat">Retinol</span>
+              <span class="ing-tag feat">Peptides (Matrixyl, Argireline)</span>
+              <span class="ing-tag">Salicylic Acid</span>
+              <span class="ing-tag">Lactic Acid</span>
+              <span class="ing-tag">Mandelic Acid</span>
+              <span class="ing-tag">TCA (peel grade)</span>
+              <span class="ing-tag">Vitamin C (LAA)</span>
+              <span class="ing-tag">Niacinamide</span>
+              <span class="ing-tag">Azelaic Acid</span>
+              <span class="ing-tag">Growth Factors</span>
+              <span class="ing-tag">Hyaluronic Acid</span>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h4>Packaging <span class="italic">options</span></h4>
+            <p class="body-sm">Bulk-format, professional dispensers with tamper-evidence and batch coding for clinic use.</p>
+            <div class="packaging-list">
+              <div class="pack-item"><span>Pro pump bottle (PET / HDPE)</span><span>200ML · 500ML · 1L</span></div>
+              <div class="pack-item"><span>Amber glass jar with spatula</span><span>50G · 100G · 250G</span></div>
+              <div class="pack-item"><span>Squeeze tube (aluminum / laminate)</span><span>100ML · 200ML · 500ML</span></div>
+              <div class="pack-item"><span>Airless pump bottle</span><span>30ML · 50ML · 100ML</span></div>
+              <div class="pack-item"><span>Amber dropper bottle</span><span>30ML · 50ML</span></div>
+              <div class="pack-item"><span>Bulk canister (refill)</span><span>1L · 5L</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cat-stats">
+          <div class="stat-block">
+            <div class="stat-label">Min Order</div>
+            <div class="stat-val"><span class="italic">200</span></div>
+            <div class="stat-sub">units per SKU</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Brief to Batch</div>
+            <div class="stat-val"><span class="italic">12</span> wks</div>
+            <div class="stat-sub">average turnaround</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Re-stock SLA</div>
+            <div class="stat-val"><span class="italic">3</span> wks</div>
+            <div class="stat-sub">post first batch</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">Base formulas</div>
+            <div class="stat-val"><span class="italic">40+</span></div>
+            <div class="stat-sub">in our R&amp;D library</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<section class="final-cta sec-cloud-clay">
+  <div class="container">
+    <div class="final-cta-inner">
+      <div class="final-cta-bg"></div>
+      <span class="final-cta-decoration left">✦</span>
+      <span class="final-cta-decoration">✦</span>
+      <div class="eyebrow">Ready to start?</div>
+      <h2 class="h-display" style="margin-top:24px">
+        Found <span class="italic">your category?</span><br>
+        Let's talk specifics.
+      </h2>
+      <p class="lede" style="margin: 32px auto 0">
+        Tell us which category you're exploring and roughly what you have in mind. We'll come back with a 48-hour quote — formulation feasibility, pricing, packaging options, timeline.
+      </p>
+      <div class="final-cta-actions">
+        <a href="tel:+919560336519" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call +91 95603 36519
+        </a>
+        <a href="formulation-finder.html" class="btn btn-ghost">Browse Formulation Finder</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand-block">
+        <div class="brand">
+          <span class="brand-name">PN KAPOOR</span>
+          <span class="brand-sub">Healthcare · Est. 1996</span>
+        </div>
+        <p class="ft-tagline">India's most founder-friendly cosmetic manufacturer. From concept to shelf — your trusted partner for beauty innovation, one bespoke formulation at a time.</p>
+        <div class="ft-socials">
+          <a href="https://www.instagram.com/pnkapoor_health_care" target="_blank" class="ft-social" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://www.linkedin.com/company/pnkapoorthirdpartymanufacturing/" target="_blank" class="ft-social" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Categories</h5><ul>
+        <li><a href="categories.html#skincare">Skincare</a></li>
+        <li><a href="categories.html#haircare">Haircare</a></li>
+        <li><a href="categories.html#bodycare">Bodycare</a></li>
+        <li><a href="categories.html#perfume">Perfumes</a></li>
+        <li><a href="categories.html#tinted">Tinted Range</a></li>
+        <li><a href="categories.html#professional">Professional</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Company</h5><ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Resources</h5><ul>
+        <li><a href="formulation-finder.html">Formulation Finder</a></li>
+        <li><a href="index.html#calc">MOQ Calculator</a></li>
+        <li><a href="#">Founder's Guide</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Contact</h5><ul>
+        <li><a href="tel:+919560336519">+91 95603 36519</a></li>
+        <li><a href="tel:+917898405490">+91 78984 05490</a></li>
+        <li><a href="mailto:info@pnkapoorhealthcare.com">info@pnkapoor<br>healthcare.com</a></li>
+        <li><a href="#">A-31/2, 2nd Floor<br>Mayapuri Phase-1<br>New Delhi 110064</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 PN Kapoor Private Limited. All rights reserved.</span>
+      <div><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Trust Center</a></div>
+    </div>
+    <div class="ft-wordmark">PN KAPOOR</div>
+  </div>
+</footer>
+
+<script>
+const navWrap = document.getElementById('navWrap');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) navWrap.classList.add('scrolled');
+  else navWrap.classList.remove('scrolled');
+});
+
+/* ===== Scroll-spy: move the active side-nav indicator as you scroll ===== */
+(function () {
+  const links = Array.from(document.querySelectorAll('.cat-sidenav a[href^="#"]'));
+  if (!links.length) return;
+
+  // Map section id -> matching nav link
+  const linkById = {};
+  links.forEach(a => {
+    const id = a.getAttribute('href').slice(1);
+    if (id) linkById[id] = a;
+  });
+
+  const sections = Array.from(document.querySelectorAll('.cat-section'))
+    .filter(s => s.id && linkById[s.id]);
+  if (!sections.length) return;
+
+  function setActive(id) {
+    links.forEach(a => a.classList.toggle('active', a === linkById[id]));
+  }
+
+  // First link active on load
+  setActive(sections[0].id);
+
+  // Track how much of each section is visible; the most-visible one wins.
+  const ratios = {};
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { ratios[e.target.id] = e.intersectionRatio; });
+
+    let bestId = null, bestRatio = 0;
+    sections.forEach(s => {
+      const r = ratios[s.id] || 0;
+      if (r > bestRatio) { bestRatio = r; bestId = s.id; }
+    });
+    if (bestId) setActive(bestId);
+  }, {
+    // Shrink the viewport so the switch fires as a section reaches the
+    // upper-middle of the screen, not the very top or bottom.
+    rootMargin: '-30% 0px -55% 0px',
+    threshold: [0, 0.1, 0.25, 0.5, 0.75, 1]
+  });
+
+  sections.forEach(s => observer.observe(s));
+})();
+</script>
+<script src="reveal.js"></script>
+
+</body>
+</html>

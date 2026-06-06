@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Formulation Finder — PN Kapoor Healthcare</title>
+<meta name="description" content="Browse 200+ base formulations our R&D has perfected. Filter by category, texture, fragrance, ingredients, care goals." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PN Kapoor Healthcare">
+<meta property="og:title" content="Formulation Finder — PN Kapoor Healthcare">
+<meta property="og:description" content="Browse 200+ base formulations our R&D has perfected. Filter by category, texture, fragrance, ingredients, care goals.">
+<meta property="og:image" content="images/hero-shelf-amber.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Formulation Finder — PN Kapoor Healthcare">
+<meta name="twitter:description" content="Browse 200+ base formulations our R&D has perfected. Filter by category, texture, fragrance, ingredients, care goals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+.finder { background: var(--cream); }
+.finder-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  margin-top: 40px;
+  align-items: start;
+}
+.finder-panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  position: sticky;
+  top: 100px;
+}
+.finder-group { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.finder-group:last-child { border-bottom: none; }
+.finder-group h4 {
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.finder-group h4 .count {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 6px;
+  background: var(--cream-deep);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all .2s;
+  user-select: none;
+}
+.chip:hover { border-color: var(--ink); }
+.chip.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.chip-noicon { padding: 6px 12px; }
+.formula-card.is-hidden { display: none; }
+.chip-swatch { width: 20px; height: 20px; border-radius: 5px; flex-shrink: 0; overflow: hidden; background-color: var(--cream-deep); background-size: cover; background-position: center; }
+
+.finder-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+.finder-count {
+  font-family: var(--display);
+  font-size: 28px;
+  letter-spacing: -0.01em;
+}
+.finder-count .italic { color: var(--forest); }
+.finder-actions { display: flex; gap: 10px; }
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 13px;
+  border-radius: var(--radius-pill);
+  background: var(--cream-deep);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  transition: all .2s;
+}
+.btn-sm:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+.finder-results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.formula-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all .25s;
+  cursor: pointer;
+}
+.formula-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -15px rgba(22,20,14,.2);
+}
+.formula-swatch {
+  aspect-ratio: 16/10;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.formula-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.formula-name { font-family: var(--display); font-size: 22px; line-height: 1.1; letter-spacing: -0.01em; }
+.formula-desc { font-size: 12.5px; color: var(--ink-mute); line-height: 1.5; }
+.formula-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.formula-tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  background: var(--cream-deep);
+  border-radius: var(--radius-pill);
+  color: var(--ink-soft);
+}
+
+@media (max-width: 1100px) {
+  .finder-grid { grid-template-columns: 1fr; }
+  .finder-panel { position: static; }
+  .finder-results { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .finder-results { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-name">PN KAPOOR</span>
+      <span class="brand-sub">Healthcare · Est. 1996</span>
+    </a>
+    <div class="nav-links">
+      <a href="categories.html">Categories</a>
+      <a href="process.html">Process</a>
+      <a href="formulation-finder.html" class="active">Formulation Finder</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#contact" class="btn btn-ghost">Book a Tour</a>
+      <a href="index.html#contact" class="btn btn-primary">Get a Quote
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-grain"></div>
+  <div class="container page-hero-inner">
+    <div class="crumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span class="current">Formulation Finder</span>
+    </div>
+    <h1 class="h-display">A living library of<br><span class="italic">200+ base formulations.</span></h1>
+    <p class="lede" style="margin-top:32px">
+      What you see below is a curated recent <strong>sample</strong> of our 200+ base formulations across 6 categories — refreshed regularly as our R&amp;D perfects new ones. Filter by category, texture, fragrance, ingredients, and care goals to explore. Every formula here is a starting point: tweak the actives, fragrance and packaging to your brand, or hand us a brief and we'll formulate from scratch.
+    </p>
+  </div>
+</section>
+
+<!-- FINDER -->
+<section class="finder">
+  <div class="container">
+    <div class="finder-grid">
+      <aside class="finder-panel">
+        <div class="finder-group">
+          <h4>Category <span class="count">6</span></h4>
+          <div class="chip-row" data-group="category">
+            <button class="chip chip-noicon" data-filter="cat" data-value="skincare">Skincare</button>
+            <button class="chip chip-noicon" data-filter="cat" data-value="haircare">Haircare</button>
+            <button class="chip chip-noicon" data-filter="cat" data-value="bodycare">Bodycare</button>
+            <button class="chip chip-noicon" data-filter="cat" data-value="perfume">Perfume</button>
+            <button class="chip chip-noicon" data-filter="cat" data-value="tinted">Tinted</button>
+            <button class="chip chip-noicon" data-filter="cat" data-value="professional">Pro</button>
+          </div>
+        </div>
+
+        <div class="finder-group">
+          <h4>Texture <span class="count">8</span></h4>
+          <div class="chip-row" data-group="texture">
+            <button class="chip" data-filter="tex" data-value="cream"><span class="chip-swatch" style="background-image:url('images/chip-cream.jpg');background-size:cover;background-position:center"></span>Cream</button>
+            <button class="chip" data-filter="tex" data-value="butter"><span class="chip-swatch" style="background-image:url('images/chip-butter.jpg');background-size:cover;background-position:center"></span>Butter</button>
+            <button class="chip" data-filter="tex" data-value="oil"><span class="chip-swatch" style="background-image:url('images/chip-oil.jpg');background-size:cover;background-position:center"></span>Oil</button>
+            <button class="chip" data-filter="tex" data-value="gel"><span class="chip-swatch" style="background-image:url('images/chip-gel.jpg');background-size:cover;background-position:center"></span>Gel</button>
+            <button class="chip" data-filter="tex" data-value="scrub"><span class="chip-swatch" style="background-image:url('images/chip-scrub.jpg');background-size:cover;background-position:center"></span>Scrub</button>
+            <button class="chip" data-filter="tex" data-value="mist"><span class="chip-swatch" style="background-image:url('images/chip-mist.jpg');background-size:cover;background-position:center"></span>Mist</button>
+            <button class="chip" data-filter="tex" data-value="serum"><span class="chip-swatch" style="background-image:url('images/chip-serum.jpg');background-size:cover;background-position:center"></span>Serum</button>
+            <button class="chip" data-filter="tex" data-value="balm"><span class="chip-swatch" style="background-image:url('images/chip-balm.jpg');background-size:cover;background-position:center"></span>Balm</button>
+          </div>
+        </div>
+
+        <div class="finder-group">
+          <h4>Fragrance <span class="count">6</span></h4>
+          <div class="chip-row" data-group="fragrance">
+            <button class="chip" data-filter="frag" data-value="floral"><span class="chip-swatch" style="background-image:url('images/chip-floral.jpg');background-size:cover;background-position:center"></span>Floral</button>
+            <button class="chip" data-filter="frag" data-value="fresh"><span class="chip-swatch" style="background-image:url('images/chip-fresh.jpg');background-size:cover;background-position:center"></span>Fresh</button>
+            <button class="chip" data-filter="frag" data-value="citrus"><span class="chip-swatch" style="background-image:url('images/chip-citrus.jpg');background-size:cover;background-position:center"></span>Citrus</button>
+            <button class="chip" data-filter="frag" data-value="woody"><span class="chip-swatch" style="background-image:url('images/chip-woody.jpg');background-size:cover;background-position:center"></span>Woody</button>
+            <button class="chip" data-filter="frag" data-value="herbal"><span class="chip-swatch" style="background-image:url('images/chip-herbal.jpg');background-size:cover;background-position:center"></span>Herbal</button>
+            <button class="chip" data-filter="frag" data-value="gourmand"><span class="chip-swatch" style="background-image:url('images/chip-gourmand.jpg');background-size:cover;background-position:center"></span>Gourmand</button>
+          </div>
+        </div>
+
+        <div class="finder-group">
+          <h4>Ingredients <span class="count">8</span></h4>
+          <div class="chip-row" data-group="ingredient">
+            <button class="chip chip-noicon" data-filter="ing" data-value="vegan">Vegan</button>
+            <button class="chip chip-noicon" data-filter="ing" data-value="cruelty-free">Cruelty-Free</button>
+            <button class="chip chip-noicon" data-filter="ing" data-value="paraben-free">Paraben-Free</button>
+            <button class="chip chip-noicon" data-filter="ing" data-value="sulfate-free">Sulfate-Free</button>
+            <button class="chip chip-noicon" data-filter="ing" data-value="silicone-free">Silicone-Free</button>
+            <button class="chip chip-noicon" data-filter="ing" data-value="essential-oils">Essential Oils</button>
+            <button class="chip chip-noicon" data-filter="ing" data-value="ayurvedic">Ayurvedic</button>
+            <button class="chip chip-noicon" data-filter="ing" data-value="halal">Halal</button>
+          </div>
+        </div>
+
+        <div class="finder-group">
+          <h4>Care Goals <span class="count">6</span></h4>
+          <div class="chip-row" data-group="care">
+            <button class="chip chip-noicon" data-filter="goal" data-value="hydration">Hydration</button>
+            <button class="chip chip-noicon" data-filter="goal" data-value="anti-aging">Anti-aging</button>
+            <button class="chip chip-noicon" data-filter="goal" data-value="brightening">Brightening</button>
+            <button class="chip chip-noicon" data-filter="goal" data-value="acne">Acne</button>
+            <button class="chip chip-noicon" data-filter="goal" data-value="relaxation">Relaxation</button>
+            <button class="chip chip-noicon" data-filter="goal" data-value="firmness">Firmness</button>
+          </div>
+        </div>
+
+        <div style="padding-top:18px;">
+          <button class="btn btn-primary" style="width:100%; justify-content:center" onclick="window.location.href='index.html#contact'">Request these formulas →</button>
+          <button class="btn btn-tonal" style="width:100%; justify-content:center; margin-top:8px" onclick="clearAll()">Clear all filters</button>
+        </div>
+      </aside>
+
+      <div>
+        <div class="finder-summary">
+          <div class="finder-count" id="finderCount">Showing <span class="italic">21</span> of 200+ base formulas</div>
+          <div class="finder-actions">
+            <button class="btn-sm">Sort: Newest</button>
+            <button class="btn-sm">View: Grid</button>
+          </div>
+        </div>
+
+        <div class="finder-results">
+          <!-- SKINCARE -->
+          <div class="formula-card" data-cat="skincare" data-tags="serum cream floral brightening vegan">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #F5E5D5, #E8C5A5 60%, #C99875)"></div>
+            <div class="formula-meta"><span>FRM-1187</span><span>Skincare · Serum</span></div>
+            <div class="formula-name">Neroli Niacinamide 10%</div>
+            <div class="formula-desc">Lightweight gel-cream. Niacinamide + zinc PCA. Top note of orange blossom.</div>
+            <div class="formula-tags"><span class="formula-tag">Vegan</span><span class="formula-tag">Brightening</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="skincare" data-tags="serum citrus brightening vegan">
+            <div class="formula-swatch" style="background:radial-gradient(circle at 40% 40%, #FFE8C8, #E5C898 60%, #A88848)"></div>
+            <div class="formula-meta"><span>FRM-1188</span><span>Skincare · Serum</span></div>
+            <div class="formula-name">Vitamin C 15% Booster</div>
+            <div class="formula-desc">Ethyl ascorbic acid + ferulic acid. Air-tight pump bottle. Citrus-tonka top.</div>
+            <div class="formula-tags"><span class="formula-tag">Vegan</span><span class="formula-tag">Brightening</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="skincare" data-tags="cream herbal floral anti-aging cruelty-free">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #E8D5E0, #C5A5C5 60%, #885888)"></div>
+            <div class="formula-meta"><span>FRM-1192</span><span>Skincare · Cream</span></div>
+            <div class="formula-name">Retinol Night Renewal</div>
+            <div class="formula-desc">0.3% encapsulated retinol + squalane. Calming lavender base note.</div>
+            <div class="formula-tags"><span class="formula-tag">Cruelty-Free</span><span class="formula-tag">Anti-aging</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="skincare" data-tags="gel herbal sulfate-free acne">
+            <div class="formula-swatch" style="background:radial-gradient(circle at 60% 30%, #C8E0D0, #88A898 60%, #486848)"></div>
+            <div class="formula-meta"><span>FRM-1195</span><span>Skincare · Cleanser</span></div>
+            <div class="formula-name">Centella Gel Cleanser</div>
+            <div class="formula-desc">pH 5.5. Centella asiatica + tea tree. Calming for sensitive skin.</div>
+            <div class="formula-tags"><span class="formula-tag">Sulfate-Free</span><span class="formula-tag">Acne</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="skincare" data-tags="cream vegan">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #F0DDC8, #D9B98E 60%, #A07838)"></div>
+            <div class="formula-meta"><span>FRM-1201</span><span>Skincare · Sunscreen</span></div>
+            <div class="formula-name">Mineral SPF 50 Tinted</div>
+            <div class="formula-desc">Zinc oxide 18% + iron oxide pigments. No white cast. PA++++.</div>
+            <div class="formula-tags"><span class="formula-tag">Vegan</span><span class="formula-tag">Reef-safe</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <!-- HAIRCARE -->
+          <div class="formula-card" data-cat="haircare" data-tags="oil herbal ayurvedic vegan essential-oils">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #E8D5B5, #C9A875 60%, #8B6A38)"></div>
+            <div class="formula-meta"><span>FRM-2103</span><span>Haircare · Oil</span></div>
+            <div class="formula-name">Bhringraj Hair Treatment</div>
+            <div class="formula-desc">Ayurvedic blend with bhringraj, amla, brahmi. Cold-pressed sesame base.</div>
+            <div class="formula-tags"><span class="formula-tag">Ayurvedic</span><span class="formula-tag">Vegan</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="haircare" data-tags="gel fresh sulfate-free vegan">
+            <div class="formula-swatch" style="background:radial-gradient(circle, #F5F0E8, #DDD5C5 60%, #A8957A)"></div>
+            <div class="formula-meta"><span>FRM-2107</span><span>Haircare · Shampoo</span></div>
+            <div class="formula-name">Rice Water Sulfate-Free</div>
+            <div class="formula-desc">Fermented rice water + biotin. Low-foam. Color-safe formulation.</div>
+            <div class="formula-tags"><span class="formula-tag">Sulfate-Free</span><span class="formula-tag">Vegan</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="haircare" data-tags="serum cruelty-free">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #DDE5D5, #95B595 60%, #486848)"></div>
+            <div class="formula-meta"><span>FRM-2118</span><span>Haircare · Serum</span></div>
+            <div class="formula-name">Scalp Renewal Drops</div>
+            <div class="formula-desc">3% caffeine + redensyl + procapil. Anti-hair-fall. Light formula.</div>
+            <div class="formula-tags"><span class="formula-tag">Cruelty-Free</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <!-- BODYCARE -->
+          <div class="formula-card" data-cat="bodycare" data-tags="scrub citrus vegan paraben-free essential-oils">
+            <div class="formula-swatch" style="background:radial-gradient(circle at 30% 30%, #F0D578, #C9A848 70%, #8B6A28)"></div>
+            <div class="formula-meta"><span>FRM-2041</span><span>Bodycare · Scrub</span></div>
+            <div class="formula-name">Bergamot Sugar Polish</div>
+            <div class="formula-desc">Cane sugar, sweet almond oil, bergamot essential. Buffs without stripping.</div>
+            <div class="formula-tags"><span class="formula-tag">Vegan</span><span class="formula-tag">Paraben-Free</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="bodycare" data-tags="butter citrus vegan hydration">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #F0D5A8, #D8B575 60%, #A88848)"></div>
+            <div class="formula-meta"><span>FRM-1745</span><span>Bodycare · Butter</span></div>
+            <div class="formula-name">Tangerine Shea Whip</div>
+            <div class="formula-desc">Raw shea + cocoa butter, mango seed oil. Whipped to a cloud texture.</div>
+            <div class="formula-tags"><span class="formula-tag">Vegan</span><span class="formula-tag">Hydration</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="bodycare" data-tags="oil herbal citrus vegan essential-oils">
+            <div class="formula-swatch" style="background:radial-gradient(ellipse at 60% 40%, #E8D078, #C9A848 60%, #6C5018)"></div>
+            <div class="formula-meta"><span>FRM-3309</span><span>Bodycare · Oil</span></div>
+            <div class="formula-name">Lemongrass Body Oil</div>
+            <div class="formula-desc">Cold-pressed sesame + jojoba. Lemongrass and ginger root for warmth.</div>
+            <div class="formula-tags"><span class="formula-tag">Vegan</span><span class="formula-tag">Essential Oils</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="bodycare" data-tags="citrus silicone-free relaxation">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #D8C5A8, #A8957A 50%, #6E5A48)"></div>
+            <div class="formula-meta"><span>FRM-2890</span><span>Bodycare · Salt</span></div>
+            <div class="formula-name">Yuzu Himalayan Soak</div>
+            <div class="formula-desc">Pink salt + epsom + yuzu peel oil. For long, intentional baths.</div>
+            <div class="formula-tags"><span class="formula-tag">Silicone-Free</span><span class="formula-tag">Relaxation</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="bodycare" data-tags="gel citrus sulfate-free vegan">
+            <div class="formula-swatch" style="background:radial-gradient(circle at 70% 30%, #E5A058, #D08538 60%, #884818)"></div>
+            <div class="formula-meta"><span>FRM-4012</span><span>Bodycare · Gel</span></div>
+            <div class="formula-name">Grapefruit Cooling Gel</div>
+            <div class="formula-desc">Aloe + glycerin + grapefruit. Sub-zero feel on application.</div>
+            <div class="formula-tags"><span class="formula-tag">Sulfate-Free</span><span class="formula-tag">Vegan</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <!-- PERFUME -->
+          <div class="formula-card" data-cat="perfume" data-tags="floral woody halal">
+            <div class="formula-swatch" style="background:radial-gradient(circle, #E8C5D5, #C58898 60%, #884858)"></div>
+            <div class="formula-meta"><span>FRM-5102</span><span>Perfume · EDP</span></div>
+            <div class="formula-name">Rose Saffron Oud</div>
+            <div class="formula-desc">Indian rose, saffron threads, smoky oud heart, ambergris base.</div>
+            <div class="formula-tags"><span class="formula-tag">Halal</span><span class="formula-tag">MOQ 250</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="perfume" data-tags="woody fresh citrus">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #C8E0D0, #88A898 60%, #486848)"></div>
+            <div class="formula-meta"><span>FRM-5108</span><span>Perfume · EDT</span></div>
+            <div class="formula-name">Vetiver Cardamom Fresh</div>
+            <div class="formula-desc">Top: bergamot. Heart: cardamom, ginger. Base: vetiver, cedar.</div>
+            <div class="formula-tags"><span class="formula-tag">Unisex</span><span class="formula-tag">MOQ 250</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="perfume" data-tags="mist woody gourmand halal">
+            <div class="formula-swatch" style="background:radial-gradient(circle at 60% 30%, #F0DDC8, #D9B98E 60%, #A07838)"></div>
+            <div class="formula-meta"><span>FRM-5115</span><span>Perfume · Mist</span></div>
+            <div class="formula-name">Sandalwood Vanilla Mist</div>
+            <div class="formula-desc">All-day body mist. Mysore sandalwood, Madagascar vanilla, soft musk.</div>
+            <div class="formula-tags"><span class="formula-tag">Halal</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <!-- TINTED -->
+          <div class="formula-card" data-cat="tinted" data-tags="serum cruelty-free brightening">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #F5D5C5, #E5A595 60%, #B85240)"></div>
+            <div class="formula-meta"><span>FRM-6201</span><span>Tinted · Serum</span></div>
+            <div class="formula-name">Niacinamide Tinted Drops</div>
+            <div class="formula-desc">10 shades for Indian skin tones. Niacinamide 5% + iron oxide pigments.</div>
+            <div class="formula-tags"><span class="formula-tag">Cruelty-Free</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="tinted" data-tags="balm floral vegan">
+            <div class="formula-swatch" style="background:radial-gradient(circle at 50% 30%, #FFDDD5, #E5A595 60%, #B85240)"></div>
+            <div class="formula-meta"><span>FRM-6208</span><span>Tinted · Balm</span></div>
+            <div class="formula-name">Hibiscus Lip-Cheek Tint</div>
+            <div class="formula-desc">6 shades. Stain finish. Shea butter base. Skin-loving actives.</div>
+            <div class="formula-tags"><span class="formula-tag">Vegan</span><span class="formula-tag">MOQ 500</span></div>
+          </div>
+
+          <!-- PROFESSIONAL -->
+          <div class="formula-card" data-cat="professional" data-tags="brightening anti-aging">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #DCE0E5, #88959F 60%, #485568)"></div>
+            <div class="formula-meta"><span>FRM-7301</span><span>Pro · Peel</span></div>
+            <div class="formula-name">Glycolic 30% Pro Peel</div>
+            <div class="formula-desc">Clinical-strength. Salon use only. Patch-test protocol included.</div>
+            <div class="formula-tags"><span class="formula-tag">B2B Only</span><span class="formula-tag">MOQ 200</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="professional" data-tags="mask hydration">
+            <div class="formula-swatch" style="background:radial-gradient(circle, #E8DDC0, #C8B898 60%, #886848)"></div>
+            <div class="formula-meta"><span>FRM-7305</span><span>Pro · Mask</span></div>
+            <div class="formula-name">Hydrating Spa Sheet Mask</div>
+            <div class="formula-desc">Bulk-format wholesale. Hyaluronic acid + ceramides. Salon-grade.</div>
+            <div class="formula-tags"><span class="formula-tag">B2B Only</span><span class="formula-tag">MOQ 200</span></div>
+          </div>
+
+          <div class="formula-card" data-cat="professional" data-tags="oil herbal essential-oils relaxation">
+            <div class="formula-swatch" style="background:linear-gradient(135deg, #E5E5DC, #B8B8A0 60%, #686858)"></div>
+            <div class="formula-meta"><span>FRM-7310</span><span>Pro · Oil</span></div>
+            <div class="formula-name">Spa Massage Oil Blend</div>
+            <div class="formula-desc">Sweet almond + jojoba + 6 essential oils. Bulk format for spas.</div>
+            <div class="formula-tags"><span class="formula-tag">Essential Oils</span><span class="formula-tag">MOQ 200</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta sec-cloud-clay">
+  <div class="container">
+    <div class="final-cta-inner">
+      <div class="final-cta-bg"></div>
+      <span class="final-cta-decoration left">✦</span>
+      <span class="final-cta-decoration">✦</span>
+      <div class="eyebrow">Found a starting point?</div>
+      <h2 class="h-display" style="margin-top:24px">
+        Don't see exactly<br>
+        <span class="italic">what you imagined?</span>
+      </h2>
+      <p class="lede" style="margin: 32px auto 0">
+        The samples above are a small slice of 200+ base formulations — and they're starting points, not the menu. Don't see it here? We formulate from scratch. Tell us what you want and we'll come back with formulations that didn't exist a week ago.
+      </p>
+      <div class="final-cta-actions">
+        <a href="index.html#contact" class="btn btn-primary">Request a custom formulation →</a>
+        <a href="categories.html" class="btn btn-ghost">Browse by category</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand-block">
+        <div class="brand"><span class="brand-name">PN KAPOOR</span><span class="brand-sub">Healthcare · Est. 1996</span></div>
+        <p class="ft-tagline">India's most founder-friendly cosmetic manufacturer. From concept to shelf — your trusted partner for beauty innovation, one bespoke formulation at a time.</p>
+        <div class="ft-socials">
+          <a href="https://www.instagram.com/pnkapoor_health_care" target="_blank" class="ft-social"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://www.linkedin.com/company/pnkapoorthirdpartymanufacturing/" target="_blank" class="ft-social"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Categories</h5><ul>
+        <li><a href="categories.html#skincare">Skincare</a></li><li><a href="categories.html#haircare">Haircare</a></li>
+        <li><a href="categories.html#bodycare">Bodycare</a></li><li><a href="categories.html#perfume">Perfumes</a></li>
+        <li><a href="categories.html#tinted">Tinted Range</a></li><li><a href="categories.html#professional">Professional</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Company</h5><ul>
+        <li><a href="about.html">Our Story</a></li><li><a href="process.html">Our Process</a></li>
+        <li><a href="faq.html">FAQ</a></li><li><a href="index.html#contact">Contact</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Resources</h5><ul>
+        <li><a href="formulation-finder.html">Formulation Finder</a></li>
+        <li><a href="#">Founder's Guide</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Contact</h5><ul>
+        <li><a href="tel:+919560336519">+91 95603 36519</a></li>
+        <li><a href="tel:+917898405490">+91 78984 05490</a></li>
+        <li><a href="mailto:info@pnkapoorhealthcare.com">info@pnkapoor<br>healthcare.com</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bottom"><span>© 2026 PN Kapoor Private Limited. All rights reserved.</span><div><a href="#">Terms</a><a href="#">Privacy</a></div></div>
+    <div class="ft-wordmark">PN KAPOOR</div>
+  </div>
+</footer>
+
+<script>
+const navWrap = document.getElementById('navWrap');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) navWrap.classList.add('scrolled');
+  else navWrap.classList.remove('scrolled');
+});
+const cards = Array.from(document.querySelectorAll('.formula-card'));
+const finderCount = document.getElementById('finderCount');
+
+function applyFilters() {
+  // Build active selections grouped by their filter group.
+  const groups = {}; // groupName -> Set of selected values
+  document.querySelectorAll('.chip.active').forEach(chip => {
+    const groupEl = chip.closest('[data-group]');
+    const group = groupEl ? groupEl.getAttribute('data-group') : 'other';
+    const value = (chip.getAttribute('data-value') || '').toLowerCase();
+    if (!value) return;
+    (groups[group] = groups[group] || new Set()).add(value);
+  });
+
+  let visible = 0;
+  cards.forEach(card => {
+    const cat = (card.getAttribute('data-cat') || '').toLowerCase();
+    const tags = (card.getAttribute('data-tags') || '').toLowerCase().split(/\s+/).filter(Boolean);
+
+    // A card must satisfy EVERY active group (AND across groups);
+    // within a group, matching ANY selected value is enough (OR within group).
+    const matches = Object.keys(groups).every(group => {
+      const wanted = groups[group];
+      if (group === 'category') {
+        return wanted.has(cat);
+      }
+      // texture / fragrance / ingredient / care all match against data-tags
+      return Array.from(wanted).some(v => tags.includes(v));
+    });
+
+    card.classList.toggle('is-hidden', !matches);
+    if (matches) visible++;
+  });
+
+  updateCount(visible);
+}
+
+function updateCount(n) {
+  if (n === 0) {
+    finderCount.innerHTML = 'No samples match those filters — but we formulate to brief. Showing <span class="italic">0</span> of 200+.';
+    return;
+  }
+  finderCount.innerHTML = 'Showing <span class="italic">' + n + '</span> of 200+ base formulas';
+}
+
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.classList.toggle('active');
+    applyFilters();
+  });
+});
+
+function clearAll() {
+  document.querySelectorAll('.chip.active').forEach(c => c.classList.remove('active'));
+  applyFilters();
+}
+</script>
+<script src="reveal.js"></script>
+
+</body>
+</html>

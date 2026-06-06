@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — PN Kapoor Healthcare</title>
+<meta name="description" content="Three generations. One uncompromising standard. Built on a 1996 vision, for 2026 founders." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PN Kapoor Healthcare">
+<meta property="og:title" content="About — PN Kapoor Healthcare">
+<meta property="og:description" content="Three generations. One uncompromising standard. Built on a 1996 vision, for 2026 founders.">
+<meta property="og:image" content="images/hero-shelf-amber.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About — PN Kapoor Healthcare">
+<meta name="twitter:description" content="Three generations. One uncompromising standard. Built on a 1996 vision, for 2026 founders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* Heritage timeline */
+.heritage-section { background: var(--cream); }
+.heritage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+.her-timeline { margin-top: 40px; position: relative; padding-left: 30px; }
+.her-timeline::before {
+  content: ""; position: absolute; left: 6px; top: 6px; bottom: 6px;
+  width: 2px; background: var(--line);
+}
+.her-event { position: relative; padding: 0 0 32px 24px; }
+.her-event:last-child { padding-bottom: 0; }
+.her-event::before {
+  content: ""; position: absolute; left: -30px; top: 6px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--cream); border: 2px solid var(--ink);
+}
+.her-event.active::before {
+  background: var(--terracotta); border-color: var(--terracotta);
+  box-shadow: 0 0 0 4px rgba(184,82,64,.2);
+}
+.her-year { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: var(--ink-mute); margin-bottom: 4px; }
+.her-title-sm { font-family: var(--display); font-size: 24px; letter-spacing: -0.01em; margin-bottom: 6px; }
+.her-desc { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+.heritage-photo {
+  aspect-ratio: 4/5;
+  background-size: cover;
+  background-position: center;
+  /* TODO: replace with a real photo of founder Chayan Kapoor */
+  background-image: url('images/about-heritage.jpg');
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 40px 80px -40px rgba(22,20,14,.4);
+}
+.heritage-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(22,20,14,.7));
+}
+.heritage-photo-label {
+  position: absolute; bottom: 30px; left: 30px; z-index: 1; color: var(--cream);
+}
+.heritage-photo-label .name { font-family: var(--display); font-size: 30px; }
+.heritage-photo-label .role { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; margin-top: 6px; opacity: .85; }
+
+@media (max-width: 900px) {
+  .heritage-grid { grid-template-columns: 1fr; gap: 50px; }
+}
+
+/* Mission/values */
+.values-section { background: var(--cream-deep); }
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 50px;
+}
+.value-card {
+  padding: 36px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.value-num {
+  font-family: var(--display);
+  font-size: 64px;
+  line-height: 1;
+  color: var(--brass);
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+.value-card h4 { font-family: var(--display); font-size: 26px; letter-spacing: -0.01em; }
+.value-card h4 .italic { color: var(--forest); }
+.value-card p { font-size: 14px; color: var(--ink-mute); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .values-grid { grid-template-columns: 1fr; }
+}
+
+/* Numbers section */
+.numbers-section { background: var(--ink); color: var(--cream); }
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 50px;
+}
+.num-block { padding-top: 30px; border-top: 1px solid #2D2A22; }
+.num-big {
+  font-family: var(--display);
+  font-size: clamp(72px, 8vw, 110px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--cream);
+}
+.num-big .italic { color: var(--brass-soft); }
+.num-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brass-soft);
+  margin-top: 14px;
+}
+.num-desc { font-size: 13px; color: #A8A293; margin-top: 6px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .numbers-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Facility tour */
+.facility-section { background: var(--cream); }
+.fac-tour {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 50px;
+  align-items: center;
+}
+.fac-image {
+  aspect-ratio: 5/4;
+  background-size: cover;
+  background-position: center;
+  background-image: url('images/about-facility.jpg');
+  border-radius: var(--radius-lg);
+}
+.fac-content h3 {
+  font-family: var(--display);
+  font-size: clamp(28px, 3vw, 38px);
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+.fac-content h3 .italic { color: var(--forest); }
+.fac-content p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 16px; }
+.fac-specs {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.fac-spec {
+  padding: 18px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.fac-spec-num { font-family: var(--display); font-size: 32px; color: var(--forest); line-height: 1; }
+.fac-spec-label { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); margin-top: 8px; }
+
+@media (max-width: 900px) {
+  .fac-tour { grid-template-columns: 1fr; }
+}
+
+/* Press section */
+.press-section { background: var(--cream-deep); }
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 50px;
+}
+.press-card {
+  padding: 28px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 200px;
+  transition: transform .25s;
+}
+.press-card:hover { transform: translateY(-3px); }
+.press-name {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+.press-quote {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  flex: 1;
+}
+.press-date {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+  .press-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .press-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-name">PN KAPOOR</span>
+      <span class="brand-sub">Healthcare · Est. 1996</span>
+    </a>
+    <div class="nav-links">
+      <a href="categories.html">Categories</a>
+      <a href="process.html">Process</a>
+      <a href="formulation-finder.html">Formulation Finder</a>
+      <a href="about.html" class="active">About</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#contact" class="btn btn-ghost">Book a Tour</a>
+      <a href="index.html#contact" class="btn btn-primary">Get a Quote
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-grain"></div>
+  <div class="container page-hero-inner">
+    <div class="crumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span class="current">About</span>
+    </div>
+    <h1 class="h-display">Three generations.<br><span class="italic">One uncompromising standard.</span></h1>
+    <p class="lede" style="margin-top:32px; max-width:64ch">
+      My grandfather had a vision in 1996 — a manufacturing company that wouldn't cut corners. It took 26 years to bring it to life. Today, PN Kapoor Healthcare is the manufacturer the legacy industry hasn't figured out how to be.
+    </p>
+  </div>
+</section>
+
+<!-- HERITAGE TIMELINE -->
+<section class="heritage-section">
+  <div class="container">
+    <div class="heritage-grid">
+      <div>
+        <div class="eyebrow">— Our story</div>
+        <h2 class="h1" style="margin-top:14px">
+          Built on a <span class="italic">1996 vision.</span><br>
+          For 2026 founders.
+        </h2>
+        <div class="her-timeline">
+          <div class="her-event">
+            <div class="her-year">1996</div>
+            <div class="her-title-sm">The vision begins</div>
+            <div class="her-desc">PN Kapoor (the elder) envisioned a contract manufacturer where quality was a non-negotiable on the factory floor, not a marketing line. The blueprint for a company that took small brands as seriously as big ones.</div>
+          </div>
+          <div class="her-event">
+            <div class="her-year">2018</div>
+            <div class="her-title-sm">The handover</div>
+            <div class="her-desc">Three decades of operational expertise pass to the next generation, who recognized something the legacy industry had missed: India's cosmetic landscape was being rewired by D2C founders who couldn't access traditional manufacturers because of their MOQ requirements.</div>
+          </div>
+          <div class="her-event active">
+            <div class="her-year">2022</div>
+            <div class="her-title-sm">Founded in Mayapuri</div>
+            <div class="her-desc">Chayan Kapoor, 3rd generation, founds PN Kapoor Healthcare. The model is built differently from day one — 500-unit MOQs, in-house R&amp;D, 12-week timelines. Within months, the first D2C brand orders are coming in.</div>
+          </div>
+          <div class="her-event active">
+            <div class="her-year">Year 1 · ₹1Cr+</div>
+            <div class="her-title-sm">Profitable from month one</div>
+            <div class="her-desc">Year-one revenue crosses ₹1 Cr. More importantly: repeat orders come in from every brand we onboard. The model works — founders don't just need product, they need a partner that takes their early stage seriously.</div>
+          </div>
+          <div class="her-event">
+            <div class="her-year">2026 · Today</div>
+            <div class="her-title-sm">40+ brands and counting</div>
+            <div class="her-desc">Powering 40+ D2C beauty brands across skincare, haircare, bodycare, perfumes, and tinted ranges. Exporting to 27 countries. Still onboarding new founders every month. Still the same factory floor.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TODO: replace with a real photo of founder Chayan Kapoor -->
+      <div class="heritage-photo">
+        <div class="heritage-photo-label">
+          <div class="name">Our craft, bottled</div>
+          <div class="role">Three generations · Mayapuri, New Delhi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">— What we believe</div>
+      <h2 class="h1" style="margin-top:14px">
+        Three principles. <span class="italic">Non-negotiable.</span>
+      </h2>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <h4>Founders aren't <span class="italic">small clients.</span></h4>
+        <p>They're future big clients we get to grow with. We don't hide our best chemists behind 5,000-unit minimums. The same R&amp;D team that develops formulas for our largest accounts works on first-batch founder orders.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <h4>Quality is a <span class="italic">floor, not a ceiling.</span></h4>
+        <p>FDA, ISO 22716, GMP, HALAL — these are starting points. Every batch gets a COA. Every formula is stability-tested. Every shipment is documented to the standard that holds up under audit, not just under marketing.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <h4>Your IP is <span class="italic">your IP.</span></h4>
+        <p>NDAs signed before the first technical call. Bespoke formulations belong to your brand, not our library. If you ever choose to leave, formula docs transfer to your next manufacturer without friction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">— By the numbers</div>
+      <h2 class="h1" style="margin-top:14px; color:var(--cream)">
+        The story in <span class="italic">numbers.</span>
+      </h2>
+    </div>
+
+    <div class="numbers-grid">
+      <div class="num-block">
+        <div class="num-big"><span class="italic">30</span></div>
+        <div class="num-label">years</div>
+        <div class="num-desc">Of family heritage in manufacturing standards</div>
+      </div>
+      <div class="num-block">
+        <div class="num-big"><span class="italic">40</span>+</div>
+        <div class="num-label">D2C brands</div>
+        <div class="num-desc">Active brands powered from our Mayapuri facility</div>
+      </div>
+      <div class="num-block">
+        <div class="num-big"><span class="italic">200</span>+</div>
+        <div class="num-label">formulations</div>
+        <div class="num-desc">Base formulas developed and ready to customize</div>
+      </div>
+      <div class="num-block">
+        <div class="num-big"><span class="italic">27</span></div>
+        <div class="num-label">countries</div>
+        <div class="num-desc">Markets where our manufactured brands ship</div>
+      </div>
+      <div class="num-block">
+        <div class="num-big"><span class="italic">500</span></div>
+        <div class="num-label">min order</div>
+        <div class="num-desc">Units. 10× lower than industry standard.</div>
+      </div>
+      <div class="num-block">
+        <div class="num-big"><span class="italic">12</span></div>
+        <div class="num-label">weeks</div>
+        <div class="num-desc">From brief to first batch shipped</div>
+      </div>
+      <div class="num-block">
+        <div class="num-big"><span class="italic">4</span></div>
+        <div class="num-label">certifications</div>
+        <div class="num-desc">FDA · ISO 22716 · GMP · HALAL — all in good standing</div>
+      </div>
+      <div class="num-block">
+        <div class="num-big"><span class="italic">100</span>%</div>
+        <div class="num-label">repeat rate</div>
+        <div class="num-desc">Every brand we onboarded in year 1 reordered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITY -->
+<section class="facility-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">— Our factory</div>
+      <h2 class="h1" style="margin-top:14px">
+        Mayapuri, <span class="italic">Delhi.</span>
+      </h2>
+    </div>
+
+    <div class="fac-tour">
+      <div class="fac-image"></div>
+      <div class="fac-content">
+        <h3>Where every formulation <span class="italic">comes to life.</span></h3>
+        <p>Our facility at A-31/2, 2nd Floor, Mayapuri Phase-1 isn't massive by industry standards — and that's by design. We chose a footprint that gives every active brand a chemist, an ops lead, and a founder-facing partner who actually knows your formula. Not a customer-success rep who reads it off a CRM.</p>
+        <p>The same factory floor that runs your 500-unit pilot is the one that scales you to a million units when demand validates. Same line. Same formula. No re-tooling, no formulation drift, no margin shock when you grow.</p>
+        <a href="index.html#contact" class="btn btn-primary" style="margin-top:24px">Book a factory tour →</a>
+
+        <div class="fac-specs">
+          <div class="fac-spec">
+            <div class="fac-spec-num">GMP</div>
+            <div class="fac-spec-label">Certified facility</div>
+          </div>
+          <div class="fac-spec">
+            <div class="fac-spec-num">ISO</div>
+            <div class="fac-spec-label">22716 compliant</div>
+          </div>
+          <div class="fac-spec">
+            <div class="fac-spec-num">Mon–Sat</div>
+            <div class="fac-spec-label">10 AM – 7 PM</div>
+          </div>
+          <div class="fac-spec">
+            <div class="fac-spec-num">Delhi</div>
+            <div class="fac-spec-label">Mayapuri Phase-1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="press-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">— In the news</div>
+      <h2 class="h1" style="margin-top:14px">
+        What people <span class="italic">are saying.</span>
+      </h2>
+    </div>
+
+    <div class="press-grid">
+      <div class="press-card">
+        <div class="press-name">YourStory</div>
+        <div class="press-quote">"A new model for cosmetic manufacturing in India — built for the D2C era, not the FMCG one."</div>
+        <div class="press-date">Coverage · 2025</div>
+      </div>
+      <div class="press-card">
+        <div class="press-name">Inc42</div>
+        <div class="press-quote">"PN Kapoor is solving the founder MOQ problem that's been holding back the next wave of Indian beauty brands."</div>
+        <div class="press-date">Coverage · 2025</div>
+      </div>
+      <div class="press-card">
+        <div class="press-name">Cosmetics Business</div>
+        <div class="press-quote">"Third-generation expertise meets modern D2C economics. A formula worth watching."</div>
+        <div class="press-date">Coverage · 2026</div>
+      </div>
+      <div class="press-card">
+        <div class="press-name">Beauty Industry India</div>
+        <div class="press-quote">"The contract manufacturer with the smallest MOQ in the industry — and quality that doesn't compromise."</div>
+        <div class="press-date">Coverage · 2026</div>
+      </div>
+    </div>
+
+    <div style="margin-top:30px; text-align:center; font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute)">
+      ✦ Placeholder quotes · Replace with real press mentions as they come in ✦
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta sec-cloud-clay">
+  <div class="container">
+    <div class="final-cta-inner">
+      <div class="final-cta-bg"></div>
+      <span class="final-cta-decoration left">✦</span>
+      <span class="final-cta-decoration">✦</span>
+      <div class="eyebrow">Want to be part of the story?</div>
+      <h2 class="h-display" style="margin-top:24px">
+        Build your brand<br>
+        <span class="italic">with us.</span>
+      </h2>
+      <p class="lede" style="margin: 32px auto 0">
+        Whether you're a founder with an idea or a brand looking for a manufacturing partner that actually picks up the phone — we'd love to talk.
+      </p>
+      <div class="final-cta-actions">
+        <a href="index.html#contact" class="btn btn-primary">Get in touch →</a>
+        <a href="process.html" class="btn btn-ghost">See how we work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand-block">
+        <div class="brand"><span class="brand-name">PN KAPOOR</span><span class="brand-sub">Healthcare · Est. 1996</span></div>
+        <p class="ft-tagline">India's most founder-friendly cosmetic manufacturer. From concept to shelf — your trusted partner for beauty innovation, one bespoke formulation at a time.</p>
+        <div class="ft-socials">
+          <a href="https://www.instagram.com/pnkapoor_health_care" target="_blank" class="ft-social"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://www.linkedin.com/company/pnkapoorthirdpartymanufacturing/" target="_blank" class="ft-social"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Categories</h5><ul>
+        <li><a href="categories.html#skincare">Skincare</a></li><li><a href="categories.html#haircare">Haircare</a></li>
+        <li><a href="categories.html#bodycare">Bodycare</a></li><li><a href="categories.html#perfume">Perfumes</a></li>
+        <li><a href="categories.html#tinted">Tinted Range</a></li><li><a href="categories.html#professional">Professional</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Company</h5><ul>
+        <li><a href="about.html">Our Story</a></li><li><a href="process.html">Our Process</a></li>
+        <li><a href="faq.html">FAQ</a></li><li><a href="index.html#contact">Contact</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Resources</h5><ul>
+        <li><a href="formulation-finder.html">Formulation Finder</a></li>
+        <li><a href="#">Founder's Guide</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Contact</h5><ul>
+        <li><a href="tel:+919560336519">+91 95603 36519</a></li>
+        <li><a href="tel:+917898405490">+91 78984 05490</a></li>
+        <li><a href="mailto:info@pnkapoorhealthcare.com">info@pnkapoor<br>healthcare.com</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bottom"><span>© 2026 PN Kapoor Private Limited. All rights reserved.</span><div><a href="#">Terms</a><a href="#">Privacy</a></div></div>
+    <div class="ft-wordmark">PN KAPOOR</div>
+  </div>
+</footer>
+
+<script>
+const navWrap = document.getElementById('navWrap');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) navWrap.classList.add('scrolled');
+  else navWrap.classList.remove('scrolled');
+});
+</script>
+<script src="reveal.js"></script>
+
+</body>
+</html>

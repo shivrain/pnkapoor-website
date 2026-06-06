@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Process — PN Kapoor Healthcare</title>
+<meta name="description" content="Our 12-week manufacturing process — from brief to first batch. Step by step, with timelines and deliverables." />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PN Kapoor Healthcare">
+<meta property="og:title" content="Process — PN Kapoor Healthcare">
+<meta property="og:description" content="Our 12-week manufacturing process — from brief to first batch. Step by step, with timelines and deliverables.">
+<meta property="og:image" content="images/hero-shelf-amber.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Process — PN Kapoor Healthcare">
+<meta name="twitter:description" content="Our 12-week manufacturing process — from brief to first batch. Step by step, with timelines and deliverables.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* ===== Process page specific ===== */
+
+/* Big timeline overview */
+.process-overview {
+  background: var(--ink);
+  color: var(--cream);
+  padding: clamp(60px, 8vw, 100px) 0;
+}
+.process-overview .eyebrow { color: var(--brass-soft); }
+.process-overview .h2 { color: var(--cream); }
+.process-overview .h2 .italic { color: var(--brass-soft); }
+.process-overview .lede { color: #C9C2AE; }
+
+.timeline-viz {
+  margin-top: 60px;
+  background: #1F1D17;
+  border: 1px solid #2D2A22;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+}
+.timeline-bar {
+  position: relative;
+  height: 6px;
+  background: #2D2A22;
+  border-radius: 3px;
+  margin: 60px 20px;
+}
+.timeline-progress {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #B8893F 0%, #D4A85A 100%);
+  border-radius: 3px;
+}
+.timeline-marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.timeline-marker .dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brass-soft);
+  border: 3px solid var(--ink);
+  position: relative;
+  z-index: 2;
+}
+.timeline-marker.checkpoint .dot { background: var(--cream); }
+.timeline-marker .label-top, .timeline-marker .label-bottom {
+  position: absolute;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--brass-soft);
+}
+.timeline-marker .label-top { bottom: 28px; }
+.timeline-marker .label-bottom {
+  top: 28px;
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--cream);
+  font-style: italic;
+}
+
+.timeline-legend {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 80px;
+}
+.legend-card {
+  padding: 20px;
+  background: #15130E;
+  border-radius: var(--radius);
+  border: 1px solid #2D2A22;
+}
+.legend-card .step-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(184,137,63,.15);
+  color: var(--brass-soft);
+  border-radius: var(--radius-pill);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.legend-card h5 {
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.legend-card p { font-size: 12.5px; color: #A8A293; line-height: 1.55; }
+
+/* Big stage sections */
+.stage {
+  padding: clamp(80px, 10vw, 140px) 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.stage-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+.stage-marker {
+  position: sticky;
+  top: 100px;
+  text-align: left;
+}
+.stage-marker .stage-num-big {
+  font-family: var(--display);
+  font-size: clamp(80px, 9vw, 140px);
+  line-height: 0.85;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+}
+.stage-marker .stage-num-big .italic { color: var(--forest); }
+.stage-marker .stage-weeks {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-top: 14px;
+}
+
+.stage-content .stage-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 12px;
+}
+.stage-content .stage-title {
+  font-family: var(--display);
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin-bottom: 24px;
+}
+.stage-content .stage-title .italic { color: var(--forest); }
+.stage-content .lede { margin-bottom: 32px; }
+
+.stage-detail h5 {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.stage-detail ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.stage-detail ul li {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  padding-left: 24px;
+  position: relative;
+}
+.stage-detail ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--forest);
+  font-weight: 700;
+}
+.stage-detail ul.you li::before { color: var(--terracotta); }
+
+/* Visual + side */
+.stage-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.stage-visual {
+  aspect-ratio: 4/3;
+  background: var(--cream-deep);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.deliverable-card {
+  padding: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.deliverable-card .dc-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 10px;
+}
+.deliverable-card .dc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.deliverable-card .dc-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--line);
+}
+.deliverable-card .dc-item:last-child { border-bottom: none; padding-bottom: 0; }
+.deliverable-card .dc-item span:last-child {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .08em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+
+/* Two-column split: what we do / what you do */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 16px;
+}
+
+@media (max-width: 1000px) {
+  .stage-row { grid-template-columns: 1fr; gap: 24px; }
+  .stage-marker { position: relative; top: 0; display: flex; align-items: baseline; gap: 20px; }
+  .stage-marker .stage-num-big { font-size: 60px; }
+  .stage-marker .stage-weeks { margin-top: 0; }
+  .split { grid-template-columns: 1fr; }
+  .timeline-legend { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .timeline-legend { grid-template-columns: 1fr; }
+}
+
+/* What you bring section */
+.you-bring {
+  background: var(--cream-deep);
+}
+.you-bring-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 50px;
+}
+.bring-item {
+  padding: 28px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+.bring-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--forest);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+.bring-item h4 {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.bring-item h4 .italic { color: var(--forest); }
+.bring-item p { font-size: 13.5px; color: var(--ink-mute); line-height: 1.55; }
+
+@media (max-width: 800px) {
+  .you-bring-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-wrap" id="navWrap">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-name">PN KAPOOR</span>
+      <span class="brand-sub">Healthcare · Est. 1996</span>
+    </a>
+    <div class="nav-links">
+      <a href="categories.html">Categories</a>
+      <a href="process.html" class="active">Process</a>
+      <a href="formulation-finder.html">Formulation Finder</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html#contact" class="btn btn-ghost">Book a Tour</a>
+      <a href="index.html#contact" class="btn btn-primary">Get a Quote
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-grain"></div>
+  <div class="container page-hero-inner">
+    <div class="crumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span class="current">Process</span>
+    </div>
+    <h1 class="h-display">Twelve weeks.<br>Four stages. <span class="italic">No surprises.</span></h1>
+    <p class="lede" style="margin-top:32px">
+      Most contract manufacturers either move too slow or skip the steps that protect your brand. We've documented every stage of our process — what happens, when it happens, what you get at the end. Read it and decide.
+    </p>
+  </div>
+</section>
+
+<!-- TIMELINE OVERVIEW -->
+<section class="process-overview">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">— The 12-week map</div>
+      <h2 class="h2" style="margin-top:14px; max-width:24ch">
+        Here's what happens<br>
+        between <span class="italic">your brief</span> and <span class="italic">your first batch.</span>
+      </h2>
+    </div>
+
+    <div class="timeline-viz">
+      <div class="timeline-bar">
+        <div class="timeline-progress"></div>
+        <div class="timeline-marker" style="left: 0%">
+          <span class="label-top">Week 1</span>
+          <div class="dot"></div>
+          <span class="label-bottom">Brief</span>
+        </div>
+        <div class="timeline-marker" style="left: 33%">
+          <span class="label-top">Week 4</span>
+          <div class="dot"></div>
+          <span class="label-bottom">R&amp;D</span>
+        </div>
+        <div class="timeline-marker checkpoint" style="left: 66%">
+          <span class="label-top">Week 8</span>
+          <div class="dot"></div>
+          <span class="label-bottom">Approve</span>
+        </div>
+        <div class="timeline-marker" style="left: 100%">
+          <span class="label-top">Week 12</span>
+          <div class="dot"></div>
+          <span class="label-bottom">Shipped</span>
+        </div>
+      </div>
+
+      <div class="timeline-legend">
+        <div class="legend-card">
+          <span class="step-tag">01 · Weeks 1–2</span>
+          <h5>Brief &amp; spec</h5>
+          <p>We translate vision into a feasibility report and starting formulation direction.</p>
+        </div>
+        <div class="legend-card">
+          <span class="step-tag">02 · Weeks 3–7</span>
+          <h5>R&amp;D variants</h5>
+          <p>Two to three formula variants developed. You test. We iterate. You approve.</p>
+        </div>
+        <div class="legend-card">
+          <span class="step-tag">03 · Weeks 8–11</span>
+          <h5>Pilot batch</h5>
+          <p>500 units manufactured, packaged, and stability-tested. Real shelf-ready product.</p>
+        </div>
+        <div class="legend-card">
+          <span class="step-tag">04 · Week 12 +</span>
+          <h5>Shipped &amp; scale</h5>
+          <p>QC clearance, COA per batch, dispatch. Re-orders in 3-week SLA going forward.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ STAGE 1 ════════ -->
+<section class="stage">
+  <div class="container">
+    <div class="stage-row">
+      <div class="stage-marker">
+        <div class="stage-num-big">01<span class="italic">.</span></div>
+        <div class="stage-weeks">Weeks 1 — 2</div>
+      </div>
+
+      <div class="stage-content">
+        <div class="stage-name">— Brief &amp; Specification</div>
+        <h2 class="stage-title">It starts with a <span class="italic">conversation.</span></h2>
+        <p class="lede">A 30-minute discovery call. A WhatsApp note. A photo of a competitor product you want to beat. There's no "correct format" for a brief — we'll extract what we need by asking the right questions.</p>
+
+        <div class="split">
+          <div class="stage-detail">
+            <h5>What we do</h5>
+            <ul>
+              <li>Run a 30–60 min discovery call covering category, positioning, target customer, and budget</li>
+              <li>Review any reference products, competitor formulas, or constraints you bring</li>
+              <li>Convert the conversation into a written brief + feasibility report within 5 business days</li>
+              <li>Identify any regulatory red flags before you commit to anything</li>
+            </ul>
+          </div>
+          <div class="stage-detail">
+            <h5>What you do</h5>
+            <ul class="you">
+              <li>Sign an NDA — we send it before the first call</li>
+              <li>Share your rough brief, even if it's "I want a niacinamide serum that's better than X"</li>
+              <li>Decide which categories and how many SKUs you want at launch</li>
+              <li>Confirm directional retail price and target margin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-side">
+        <div class="stage-visual">
+          <svg width="100%" height="100%" viewBox="0 0 300 220" fill="none">
+            <rect x="20" y="20" width="260" height="180" rx="10" fill="#FFFBF1" stroke="#16140E" stroke-width="1.5"/>
+            <text x="40" y="48" font-family="Instrument Serif" font-size="18" fill="#16140E" font-style="italic">Brief #1187</text>
+            <line x1="40" y1="60" x2="180" y2="60" stroke="#B8893F" stroke-width="0.5"/>
+            <text x="40" y="80" font-family="Geist Mono" font-size="9" fill="#5B554A" letter-spacing="1">CATEGORY · SKINCARE</text>
+            <text x="40" y="98" font-family="Geist Mono" font-size="9" fill="#5B554A" letter-spacing="1">FORMAT · GEL-CREAM</text>
+            <text x="40" y="116" font-family="Geist Mono" font-size="9" fill="#5B554A" letter-spacing="1">ACTIVE · NIACINAMIDE 10%</text>
+            <text x="40" y="134" font-family="Geist Mono" font-size="9" fill="#5B554A" letter-spacing="1">SCENT · NEROLI · LIGHT</text>
+            <text x="40" y="152" font-family="Geist Mono" font-size="9" fill="#5B554A" letter-spacing="1">TARGET MRP · ₹599</text>
+            <text x="40" y="170" font-family="Geist Mono" font-size="9" fill="#5B554A" letter-spacing="1">MOQ · 500 UNITS</text>
+            <rect x="40" y="180" width="100" height="14" rx="3" fill="#2A3F2A"/>
+            <text x="90" y="190" text-anchor="middle" font-family="Geist Mono" font-size="8" fill="#F2EBDD" letter-spacing="1">FEASIBLE</text>
+          </svg>
+        </div>
+        <div class="deliverable-card">
+          <div class="dc-label">— Your deliverables</div>
+          <div class="dc-list">
+            <div class="dc-item"><span>Signed NDA</span><span>Day 1</span></div>
+            <div class="dc-item"><span>Written brief document</span><span>Day 3</span></div>
+            <div class="dc-item"><span>Feasibility report</span><span>Day 5</span></div>
+            <div class="dc-item"><span>Indicative cost sheet</span><span>Day 7</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ STAGE 2 ════════ -->
+<section class="stage">
+  <div class="container">
+    <div class="stage-row">
+      <div class="stage-marker">
+        <div class="stage-num-big">02<span class="italic">.</span></div>
+        <div class="stage-weeks">Weeks 3 — 7</div>
+      </div>
+
+      <div class="stage-content">
+        <div class="stage-name">— R&amp;D Formulation</div>
+        <h2 class="stage-title">Two to three variants. <span class="italic">You pick.</span></h2>
+        <p class="lede">Our chemists develop multiple variants of your formula. We don't pull a base off the shelf and slap your label on it. Every product starts from scratch using your brief, your budget, and your performance targets.</p>
+
+        <div class="split">
+          <div class="stage-detail">
+            <h5>What we do</h5>
+            <ul>
+              <li>Develop 2–3 formula variants exploring different actives, textures, or scent profiles</li>
+              <li>Conduct preliminary stability and pH testing on each variant</li>
+              <li>Send physical samples (15ML / 30ML) to your address — typically 50g across variants</li>
+              <li>Walk you through the trade-offs of each variant on a video call</li>
+              <li>Iterate based on your feedback — usually 1–2 rounds of refinement</li>
+            </ul>
+          </div>
+          <div class="stage-detail">
+            <h5>What you do</h5>
+            <ul class="you">
+              <li>Test the samples for at least 7 days — both yourself and a small group</li>
+              <li>Document feedback on texture, scent, absorption, skin feel</li>
+              <li>Pick a direction (or ask us to merge the best of two variants)</li>
+              <li>Approve the final formula in writing before pilot batch begins</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-side">
+        <div class="stage-visual">
+          <svg width="100%" height="100%" viewBox="0 0 300 220" fill="none">
+            <g>
+              <circle cx="80" cy="80" r="30" fill="rgba(42,63,42,0.1)" stroke="#2A3F2A" stroke-width="1"/>
+              <text x="80" y="84" text-anchor="middle" font-family="Instrument Serif" font-size="14" fill="#2A3F2A" font-style="italic">v1</text>
+              <text x="80" y="125" text-anchor="middle" font-family="Geist Mono" font-size="7" fill="#5B554A">LIGHTWEIGHT</text>
+            </g>
+            <g>
+              <circle cx="150" cy="80" r="36" fill="rgba(42,63,42,0.16)" stroke="#2A3F2A" stroke-width="2"/>
+              <text x="150" y="84" text-anchor="middle" font-family="Instrument Serif" font-size="16" fill="#2A3F2A" font-style="italic">v2 ✓</text>
+              <text x="150" y="130" text-anchor="middle" font-family="Geist Mono" font-size="7" fill="#5B554A">APPROVED</text>
+            </g>
+            <g>
+              <circle cx="220" cy="80" r="28" fill="rgba(42,63,42,0.08)" stroke="#2A3F2A" stroke-width="1"/>
+              <text x="220" y="84" text-anchor="middle" font-family="Instrument Serif" font-size="14" fill="#2A3F2A" font-style="italic">v3</text>
+              <text x="220" y="125" text-anchor="middle" font-family="Geist Mono" font-size="7" fill="#5B554A">RICHER</text>
+            </g>
+            <line x1="80" y1="80" x2="150" y2="80" stroke="#B8893F" stroke-width="0.6" stroke-dasharray="3 3"/>
+            <line x1="150" y1="80" x2="220" y2="80" stroke="#B8893F" stroke-width="0.6" stroke-dasharray="3 3"/>
+            <text x="150" y="180" text-anchor="middle" font-family="Instrument Serif" font-size="13" fill="#16140E" font-style="italic">Test &amp; choose</text>
+          </svg>
+        </div>
+        <div class="deliverable-card">
+          <div class="dc-label">— Your deliverables</div>
+          <div class="dc-list">
+            <div class="dc-item"><span>2–3 physical variants</span><span>Week 4</span></div>
+            <div class="dc-item"><span>Formula specification sheets</span><span>Week 4</span></div>
+            <div class="dc-item"><span>Iteration round</span><span>Week 6</span></div>
+            <div class="dc-item"><span>Final formula sign-off</span><span>Week 7</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ STAGE 3 ════════ -->
+<section class="stage">
+  <div class="container">
+    <div class="stage-row">
+      <div class="stage-marker">
+        <div class="stage-num-big">03<span class="italic">.</span></div>
+        <div class="stage-weeks">Weeks 8 — 11</div>
+      </div>
+
+      <div class="stage-content">
+        <div class="stage-name">— Pilot Batch</div>
+        <h2 class="stage-title">500 real units. <span class="italic">Real packaging.</span></h2>
+        <p class="lede">This is the moment your brand becomes physical. We manufacture 500 units in the approved formula, in your final packaging, with your label artwork. Real product. Shelf-ready. Ready to ship.</p>
+
+        <div class="split">
+          <div class="stage-detail">
+            <h5>What we do</h5>
+            <ul>
+              <li>Procure raw materials and packaging components from approved vendors</li>
+              <li>Manufacture 500 units in our GMP-certified facility</li>
+              <li>Run accelerated stability test (mimics 12 months in 4 weeks)</li>
+              <li>Apply your label artwork to bottles (or full secondary packaging)</li>
+              <li>Quality-control each batch with checks documented in COA</li>
+            </ul>
+          </div>
+          <div class="stage-detail">
+            <h5>What you do</h5>
+            <ul class="you">
+              <li>Finalize label artwork and submit print-ready files by Week 8</li>
+              <li>Approve final packaging mockups (we'll send 2-3 pre-production samples)</li>
+              <li>Make the production deposit (typically 50% of total batch cost)</li>
+              <li>Plan your launch dates around the Week 12 shipping window</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-side">
+        <div class="stage-visual">
+          <svg width="100%" height="100%" viewBox="0 0 300 220" fill="none">
+            <g>
+              <rect x="30" y="60" width="32" height="100" rx="4" fill="#FFFBF1" stroke="#16140E" stroke-width="1"/>
+              <rect x="68" y="60" width="32" height="100" rx="4" fill="#FFFBF1" stroke="#16140E" stroke-width="1"/>
+              <rect x="106" y="60" width="32" height="100" rx="4" fill="#FFFBF1" stroke="#16140E" stroke-width="1"/>
+              <rect x="144" y="60" width="32" height="100" rx="4" fill="#FFFBF1" stroke="#16140E" stroke-width="1"/>
+              <rect x="182" y="60" width="32" height="100" rx="4" fill="#FFFBF1" stroke="#16140E" stroke-width="1"/>
+              <rect x="220" y="60" width="32" height="100" rx="4" fill="#B8893F"/>
+            </g>
+            <text x="146" y="44" text-anchor="middle" font-family="Geist Mono" font-size="11" fill="#16140E" letter-spacing="2">PILOT · 500 UNITS</text>
+            <text x="146" y="190" text-anchor="middle" font-family="Instrument Serif" font-size="13" fill="#16140E" font-style="italic">Real product. Ready to ship.</text>
+          </svg>
+        </div>
+        <div class="deliverable-card">
+          <div class="dc-label">— Your deliverables</div>
+          <div class="dc-list">
+            <div class="dc-item"><span>Pre-production packaging samples</span><span>Week 8</span></div>
+            <div class="dc-item"><span>Stability test certificate</span><span>Week 10</span></div>
+            <div class="dc-item"><span>Pilot batch (500 units)</span><span>Week 11</span></div>
+            <div class="dc-item"><span>Certificate of Analysis (COA)</span><span>Week 11</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ STAGE 4 ════════ -->
+<section class="stage">
+  <div class="container">
+    <div class="stage-row">
+      <div class="stage-marker">
+        <div class="stage-num-big">04<span class="italic">.</span></div>
+        <div class="stage-weeks">Week 12 +</div>
+      </div>
+
+      <div class="stage-content">
+        <div class="stage-name">— Shipped &amp; Scale</div>
+        <h2 class="stage-title">Out the door. <span class="italic">Onto your shelf.</span></h2>
+        <p class="lede">Your batch clears QC, dispatches from Mayapuri, and lands at your warehouse. From here, every re-order is faster — formulation locked, packaging vendors aligned, raw material pipeline established.</p>
+
+        <div class="split">
+          <div class="stage-detail">
+            <h5>What we do</h5>
+            <ul>
+              <li>Final QC pass — every batch gets visual, physical, and microbial checks</li>
+              <li>Pack and dispatch within 5 business days of QC clearance</li>
+              <li>Send shipping confirmation, COA, and complete documentation packet</li>
+              <li>Hold safety stock of your key raw materials for fast re-orders</li>
+              <li>Schedule a Month 1 review call to plan re-orders and scale</li>
+            </ul>
+          </div>
+          <div class="stage-detail">
+            <h5>What you do</h5>
+            <ul class="you">
+              <li>Final payment cleared upon QC sign-off (50% remaining)</li>
+              <li>Confirm shipping address and any specific logistics requirements</li>
+              <li>Launch your product — we cheer you on from the sidelines</li>
+              <li>Send re-order forecast when you have one — even directional helps us</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-side">
+        <div class="stage-visual">
+          <svg width="100%" height="100%" viewBox="0 0 300 220" fill="none">
+            <path d="M30 160 L80 142 L130 120 L180 92 L230 60 L270 36" stroke="#2A3F2A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <circle cx="30" cy="160" r="5" fill="#2A3F2A"/>
+            <circle cx="80" cy="142" r="5" fill="#2A3F2A"/>
+            <circle cx="130" cy="120" r="5" fill="#2A3F2A"/>
+            <circle cx="180" cy="92" r="5" fill="#2A3F2A"/>
+            <circle cx="230" cy="60" r="5" fill="#2A3F2A"/>
+            <circle cx="270" cy="36" r="7" fill="#B8893F"/>
+            <text x="30" y="180" font-family="Geist Mono" font-size="8" fill="#5B554A">500</text>
+            <text x="80" y="162" font-family="Geist Mono" font-size="8" fill="#5B554A">1K</text>
+            <text x="130" y="140" font-family="Geist Mono" font-size="8" fill="#5B554A">5K</text>
+            <text x="180" y="112" font-family="Geist Mono" font-size="8" fill="#5B554A">25K</text>
+            <text x="230" y="80" font-family="Geist Mono" font-size="8" fill="#5B554A">100K</text>
+            <text x="270" y="22" text-anchor="middle" font-family="Geist Mono" font-size="9" fill="#B8893F" letter-spacing="1">1M+</text>
+            <text x="150" y="208" text-anchor="middle" font-family="Instrument Serif" font-size="13" fill="#16140E" font-style="italic">Same line. Same formula.</text>
+          </svg>
+        </div>
+        <div class="deliverable-card">
+          <div class="dc-label">— Your deliverables</div>
+          <div class="dc-list">
+            <div class="dc-item"><span>Final QC report</span><span>Week 12</span></div>
+            <div class="dc-item"><span>Complete shipment</span><span>Week 12</span></div>
+            <div class="dc-item"><span>Brand documentation pack</span><span>Week 12</span></div>
+            <div class="dc-item"><span>Re-order forecast workshop</span><span>Month 1</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU BRING -->
+<section class="you-bring">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">— What you actually need to start</div>
+      <h2 class="h1" style="margin-top:14px">
+        Three things to bring. <span class="italic">That's it.</span>
+      </h2>
+      <p class="lede" style="margin-top:24px">
+        Founders often delay reaching out because they think they need a complete brand brief, a designed package, and a market study. You don't. Bring these, and we'll figure out the rest with you.
+      </p>
+    </div>
+    <div class="you-bring-grid">
+      <div class="bring-item">
+        <div class="bring-icon">①</div>
+        <h4>A <span class="italic">rough idea</span></h4>
+        <p>"Niacinamide serum, oily skin, under ₹399 retail" is already enough for our first call. We'll structure it into a brief together.</p>
+      </div>
+      <div class="bring-item">
+        <div class="bring-icon">②</div>
+        <h4>Your <span class="italic">budget range</span></h4>
+        <p>Even a directional answer — ₹2L? ₹5L? ₹15L? — helps us scope the right number of SKUs and packaging tier from day one.</p>
+      </div>
+      <div class="bring-item">
+        <div class="bring-icon">③</div>
+        <h4>A <span class="italic">launch goal</span></h4>
+        <p>"Launching at a beauty event in March" or "selling on Nykaa from June" — we backtrack the 12-week timeline from your goal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta sec-cloud-clay">
+  <div class="container">
+    <div class="final-cta-inner">
+      <div class="final-cta-bg"></div>
+      <span class="final-cta-decoration left">✦</span>
+      <span class="final-cta-decoration">✦</span>
+      <div class="eyebrow">Ready to start week 1?</div>
+      <h2 class="h-display" style="margin-top:24px">
+        Start your <span class="italic">12-week clock.</span>
+      </h2>
+      <p class="lede" style="margin: 32px auto 0">
+        The earliest your product can hit shelves is 12 weeks from your first call with us. Let's start that clock — book a discovery call below.
+      </p>
+      <div class="final-cta-actions">
+        <a href="tel:+919560336519" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Book a discovery call
+        </a>
+        <a href="categories.html" class="btn btn-ghost">Browse our categories</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand-block">
+        <div class="brand">
+          <span class="brand-name">PN KAPOOR</span>
+          <span class="brand-sub">Healthcare · Est. 1996</span>
+        </div>
+        <p class="ft-tagline">India's most founder-friendly cosmetic manufacturer. From concept to shelf — your trusted partner for beauty innovation, one bespoke formulation at a time.</p>
+        <div class="ft-socials">
+          <a href="https://www.instagram.com/pnkapoor_health_care" target="_blank" class="ft-social"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://www.linkedin.com/company/pnkapoorthirdpartymanufacturing/" target="_blank" class="ft-social"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col"><h5>Categories</h5><ul>
+        <li><a href="categories.html#skincare">Skincare</a></li>
+        <li><a href="categories.html#haircare">Haircare</a></li>
+        <li><a href="categories.html#bodycare">Bodycare</a></li>
+        <li><a href="categories.html#perfume">Perfumes</a></li>
+        <li><a href="categories.html#tinted">Tinted Range</a></li>
+        <li><a href="categories.html#professional">Professional</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Company</h5><ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="process.html">Our Process</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Resources</h5><ul>
+        <li><a href="formulation-finder.html">Formulation Finder</a></li>
+        <li><a href="index.html#calc">MOQ Calculator</a></li>
+        <li><a href="#">Founder's Guide</a></li>
+      </ul></div>
+      <div class="ft-col"><h5>Contact</h5><ul>
+        <li><a href="tel:+919560336519">+91 95603 36519</a></li>
+        <li><a href="tel:+917898405490">+91 78984 05490</a></li>
+        <li><a href="mailto:info@pnkapoorhealthcare.com">info@pnkapoor<br>healthcare.com</a></li>
+        <li><a href="#">A-31/2, 2nd Floor<br>Mayapuri Phase-1<br>New Delhi 110064</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 PN Kapoor Private Limited. All rights reserved.</span>
+      <div><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Trust Center</a></div>
+    </div>
+    <div class="ft-wordmark">PN KAPOOR</div>
+  </div>
+</footer>
+
+<script>
+const navWrap = document.getElementById('navWrap');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) navWrap.classList.add('scrolled');
+  else navWrap.classList.remove('scrolled');
+});
+</script>
+<script src="reveal.js"></script>
+
+</body>
+</html>
