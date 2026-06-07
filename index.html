@@ -481,30 +481,7 @@
 .pkg-note .dot { color: var(--brass); margin: 0 8px; }
 @media (max-width: 560px) { .pkg-item { width: 208px; height: 158px; } }
 
-/* --- MOQ Calculator --- */
-.moq-card { max-width: 940px; margin: 50px auto 0; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(28px, 4vw, 48px); }
-.moq-q { font-family: var(--display); font-size: clamp(20px,2vw,26px); letter-spacing: -0.01em; margin-bottom: 6px; }
-.moq-sub { font-size: 13.5px; color: var(--ink-mute); margin-bottom: 26px; }
-.moq-range-wrap { display: flex; align-items: center; gap: 22px; }
-.moq-range { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--forest), var(--brass-soft)); outline: none; }
-.moq-range::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--paper); border: 3px solid var(--forest); cursor: pointer; box-shadow: 0 4px 12px rgba(22,20,14,.2); }
-.moq-range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--paper); border: 3px solid var(--forest); cursor: pointer; }
-.moq-units { font-family: var(--display); font-size: clamp(32px,4vw,50px); color: var(--ink); line-height: 1; white-space: nowrap; }
-.moq-units .u { font-size: 15px; color: var(--ink-mute); font-family: var(--mono); }
-.moq-out { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
-.moq-col { padding: 26px; border-radius: var(--radius); }
-.moq-col.trad { background: var(--cream-deep); border: 1px solid var(--line); }
-.moq-col.pnk { background: var(--forest-deep); color: var(--cream); }
-.moq-col .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 12px; }
-.moq-col.pnk .lbl { color: var(--brass-soft); }
-.moq-col .big { font-family: var(--display); font-size: clamp(26px,3.2vw,38px); line-height: 1.05; }
-.moq-col .big .italic { color: var(--terracotta); font-style: italic; }
-.moq-col.pnk .big .italic { color: var(--brass-soft); }
-.moq-col .note { font-size: 13px; margin-top: 14px; line-height: 1.55; color: var(--ink-mute); }
-.moq-col.pnk .note { color: #C9C2AE; }
-.moq-verdict { margin-top: 26px; text-align: center; font-size: 15.5px; color: var(--ink-soft); }
-.moq-verdict strong { color: var(--forest); font-weight: 600; }
-@media (max-width: 700px) { .moq-out { grid-template-columns: 1fr; } .moq-range-wrap { flex-direction: column; align-items: stretch; gap: 14px; } }
+
 
 /* --- Process simplified (4 steps) --- */
 .process-mini {
@@ -924,6 +901,18 @@
   .lead-row { grid-template-columns: 1fr; }
 }
 
+
+/* --- Trust strip (certifications + scale) --- */
+.trust-strip { padding: 30px 0; border-bottom: 1px solid var(--line); }
+.trust-row { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+.trust-certs { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.trust-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
+.cert { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--ink); padding: 7px 14px; border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--paper); }
+.trust-nums { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+.tnum { display: flex; flex-direction: column; line-height: 1; }
+.tnum strong { font-family: var(--display); font-size: 30px; font-weight: 400; color: var(--ink); letter-spacing: -0.01em; }
+.tnum span { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin-top: 7px; }
+@media (max-width: 760px) { .trust-row { flex-direction: column; align-items: flex-start; gap: 22px; } }
 </style>
 </head>
 <body>
@@ -958,7 +947,7 @@
       <div>
         <div class="hero-tag">
           <span class="hero-tag-pill">New</span>
-          <span>Onboarding D2C brands for Q3 — limited capacity</span>
+          <span>Now onboarding new beauty brands for 2026</span>
         </div>
         <h1 class="h-display">
           India's most<br>
@@ -966,7 +955,7 @@
           cosmetic manufacturer.
         </h1>
         <p class="lede hero-sub">
-          From 500 units to a million — on the same production line. The contract manufacturer built for brands the legacy industry can't serve. Bespoke formulations, in-house R&amp;D, 12-week brief-to-batch timelines.
+          Bespoke formulations, in-house R&amp;D, and a GMP-certified line that scales from launch to a million units — for the brands the legacy industry won't serve, across skincare, haircare, bodycare and perfume.
         </p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary btn-arrow">Get a Free Quote
@@ -975,11 +964,11 @@
           <a href="process.html" class="btn btn-ghost">How it works →</a>
         </div>
         <div class="hero-meta">
-          <div class="hero-meta-item"><strong>500</strong>unit MOQ</div>
-          <div class="hero-meta-divider"></div>
-          <div class="hero-meta-item"><strong>12</strong>week timeline</div>
-          <div class="hero-meta-divider"></div>
           <div class="hero-meta-item"><strong>27</strong>countries shipped</div>
+          <div class="hero-meta-divider"></div>
+          <div class="hero-meta-item"><strong>200+</strong>base formulations</div>
+          <div class="hero-meta-divider"></div>
+          <div class="hero-meta-item"><strong>40+</strong>brands powered</div>
         </div>
       </div>
 
@@ -1039,36 +1028,22 @@
   </div>
 </section>
 
-<!-- ═══════════ BIG STATS (NEW) ═══════════ -->
-<section class="sec-cream">
+<!-- ═══════════ TRUST STRIP (certs + scale) ═══════════ -->
+<section class="trust-strip sec-cream">
   <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">— By the numbers</div>
-      <h2 class="h2" style="margin-top:14px">
-        Three generations. <span class="italic">One mission.</span>
-      </h2>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-big">
-        <div class="stat-num" data-target="30"><span class="italic">30</span><span class="stat-unit">yrs</span></div>
-        <div class="stat-name">— Heritage</div>
-        <div class="stat-desc">Family vision since 1996. Third generation today.</div>
+    <div class="trust-row">
+      <div class="trust-certs">
+        <span class="trust-label">Certified —</span>
+        <span class="cert">FDA</span>
+        <span class="cert">ISO 22716</span>
+        <span class="cert">GMP</span>
+        <span class="cert">HALAL</span>
       </div>
-      <div class="stat-big">
-        <div class="stat-num" data-target="40"><span class="italic">40</span><span class="stat-unit">+</span></div>
-        <div class="stat-name">— D2C Brands</div>
-        <div class="stat-desc">Active brands powered from our Mayapuri facility.</div>
-      </div>
-      <div class="stat-big">
-        <div class="stat-num" data-target="27"><span class="italic">27</span><span class="stat-unit">⁰</span></div>
-        <div class="stat-name">— Countries</div>
-        <div class="stat-desc">FDA, ISO, GMP, and HALAL ready for global export.</div>
-      </div>
-      <div class="stat-big">
-        <div class="stat-num" data-target="500"><span class="italic">500</span><span class="stat-unit">unit</span></div>
-        <div class="stat-name">— Min Order</div>
-        <div class="stat-desc">10× lower than the industry standard of 5,000 units.</div>
+      <div class="trust-nums">
+        <div class="tnum"><strong>27</strong><span>Countries</span></div>
+        <div class="tnum"><strong>200+</strong><span>Formulations</span></div>
+        <div class="tnum"><strong>40+</strong><span>Brands</span></div>
+        <div class="tnum"><strong>1996</strong><span>Established</span></div>
       </div>
     </div>
   </div>
@@ -1103,7 +1078,7 @@
           </ul>
           <div class="svc-cta">
             <a href="formulation-finder.html">Browse formulations →</a>
-            <span class="moq">MOQ 500</span>
+            <span class="moq">Low minimums</span>
           </div>
         </div>
       </div>
@@ -1122,7 +1097,7 @@
           </ul>
           <div class="svc-cta">
             <a href="process.html">See process →</a>
-            <span class="moq">MOQ 500</span>
+            <span class="moq">Scales to 1M+</span>
           </div>
         </div>
       </div>
@@ -1141,7 +1116,7 @@
           </ul>
           <div class="svc-cta">
             <a href="process.html">Custom process →</a>
-            <span class="moq">MOQ 500</span>
+            <span class="moq">You own the IP</span>
           </div>
         </div>
       </div>
@@ -1149,39 +1124,6 @@
   </div>
 </section>
 
-<!-- ═══════════ MOQ CALCULATOR ═══════════ -->
-<section class="sec-cream-deep" id="calc">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">— Built to scale with you</div>
-      <h2 class="h1" style="margin-top:14px">Start at 500. Scale to <span class="italic">a million.</span></h2>
-      <p class="lede" style="margin-top:24px">
-        The legacy industry forces 5,000-unit minimums — so you gamble lakhs before your first sale. We start you wherever you are and scale you to a million on the very same line: no re-tooling, no re-formulating, no switching factories as you grow. Move the slider to picture your first run.
-      </p>
-    </div>
-    <div class="moq-card">
-      <div class="moq-q">What's a realistic first run for you?</div>
-      <div class="moq-sub">Drag to set it — there's no wrong answer.</div>
-      <div class="moq-range-wrap">
-        <input type="range" class="moq-range" id="moqRange" min="500" max="6000" step="100" value="1000" aria-label="Units needed">
-        <div class="moq-units"><span id="moqUnits">1,000</span> <span class="u">units</span></div>
-      </div>
-      <div class="moq-out">
-        <div class="moq-col trad">
-          <div class="lbl">Legacy manufacturer · 5,000 minimum</div>
-          <div class="big">Forced to commit to <span class="italic" id="tradOrder">5,000</span></div>
-          <div class="note">You’d pay for <span id="tradWaste">4,000</span> units before a single sale — about <strong id="tradMoney">₹4,80,000</strong> locked in stock on day one.</div>
-        </div>
-        <div class="moq-col pnk">
-          <div class="lbl">PN Kapoor · from 500</div>
-          <div class="big">Start with exactly <span class="italic" id="pnkOrder">1,000</span></div>
-          <div class="note">Then scale to 1M+ on the <em>same line</em> — same formula, same finish, 3-week re-orders. We grow when you grow.</div>
-        </div>
-      </div>
-      <div class="moq-verdict" id="moqVerdict">That’s <strong>₹4,80,000</strong> you keep for growth today — and a clear runway to a million when you’re ready.</div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════ PROCESS MINI ═══════════ -->
 <section class="sec-ink">
@@ -1672,74 +1614,6 @@
   </div>
 </section>
 
-<!-- ═══════════ HERITAGE TEASER ═══════════ -->
-<section class="heritage-teaser">
-  <div class="container">
-    <div class="heritage-grid">
-      <div>
-        <div class="eyebrow">— Three generations. One uncompromising standard.</div>
-        <h2 class="h1" style="margin-top:14px">
-          Built on a 1996 vision.<br>
-          For <span class="italic">2026 founders.</span>
-        </h2>
-        <p class="lede" style="margin-top:24px">
-          A grandfather's vision in 1996. Three decades of operational rigor. A third generation who recognized D2C founders couldn't access traditional manufacturers — and built differently.
-        </p>
-        <div class="heritage-years">
-          <div class="heritage-year">
-            <span class="yr">Vision</span>
-            1996
-          </div>
-          <div class="heritage-year">
-            <span class="yr">Founded</span>
-            2022
-          </div>
-          <div class="heritage-year">
-            <span class="yr">Year 1</span>
-            ₹1Cr+
-          </div>
-        </div>
-        <div style="margin-top:32px">
-          <a href="about.html" class="btn" style="background:var(--brass-soft); color:var(--ink)">
-            Read our story →
-          </a>
-        </div>
-      </div>
-      <div class="her-tl">
-        <div class="her-tl-card">
-          <div class="her-tl-dot"></div>
-          <div class="her-tl-year">— 1996 · The vision</div>
-          <div class="her-tl-title">A blueprint for <span class="italic">honest manufacturing.</span></div>
-          <div class="her-tl-desc">PN Kapoor (elder) envisions a contract manufacturer where quality is non-negotiable on the factory floor — not a marketing line.</div>
-        </div>
-        <div class="her-tl-card">
-          <div class="her-tl-dot"></div>
-          <div class="her-tl-year">— 2018 · The handover</div>
-          <div class="her-tl-title">Three decades, <span class="italic">one floor.</span></div>
-          <div class="her-tl-desc">Operational expertise passes to the next generation, who sees an opening the legacy industry missed: D2C founders need a different kind of partner.</div>
-        </div>
-        <div class="her-tl-card">
-          <div class="her-tl-dot"></div>
-          <div class="her-tl-year">— 2022 · The founding</div>
-          <div class="her-tl-title">PN Kapoor Healthcare <span class="italic">opens in Mayapuri.</span></div>
-          <div class="her-tl-desc">3rd-gen Chayan Kapoor founds the company. 500-unit MOQs, in-house R&amp;D, 12-week timelines — built differently from day one.</div>
-        </div>
-        <div class="her-tl-card">
-          <div class="her-tl-dot"></div>
-          <div class="her-tl-year">— Year 1 · The proof</div>
-          <div class="her-tl-title">₹1 Cr+ revenue. <span class="italic">100% reorder rate.</span></div>
-          <div class="her-tl-desc">Profitable from month one. Every brand we onboarded came back for more. The model works.</div>
-        </div>
-        <div class="her-tl-card current">
-          <div class="her-tl-dot"></div>
-          <div class="her-tl-year">— 2026 · Today</div>
-          <div class="her-tl-title">40+ brands. <span class="italic">27 countries.</span></div>
-          <div class="her-tl-desc">Powering D2C beauty brands across skincare, haircare, bodycare, perfumes, and tinted ranges — and still onboarding new founders every month.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════ LEAD FORM ═══════════ -->
 <section class="lead-section" id="contact">
@@ -1938,28 +1812,6 @@ const counterObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 counters.forEach(c => counterObs.observe(c));
 
-// MOQ calculator
-(function () {
-  var r = document.getElementById('moqRange');
-  if (!r) return;
-  var COST = 120; // indicative ₹ per unit
-  var num = function (n) { return n.toLocaleString('en-IN'); };
-  var money = function (n) { return '₹' + Math.round(n).toLocaleString('en-IN'); };
-  function upd() {
-    var u = +r.value;
-    var waste = Math.max(0, 5000 - u);
-    document.getElementById('moqUnits').textContent = num(u);
-    document.getElementById('tradOrder').textContent = num(Math.max(5000, u));
-    document.getElementById('tradWaste').textContent = num(waste);
-    document.getElementById('tradMoney').textContent = money(waste * COST);
-    document.getElementById('pnkOrder').textContent = num(u);
-    var v = document.getElementById('moqVerdict');
-    if (waste > 0) v.innerHTML = "That's <strong>" + money(waste * COST) + "</strong> you keep for growth today — and a clear runway to a million when you’re ready.";
-    else v.innerHTML = "At <strong>" + num(u) + " units</strong> you’re already scaling — same line, same formula, all the way to a million.";
-  }
-  r.addEventListener('input', upd);
-  upd();
-})();
 </script>
 <script src="reveal.js"></script>
 

@@ -327,6 +327,32 @@
 @media (max-width: 800px) {
   .you-bring-grid { grid-template-columns: 1fr; }
 }
+
+/* --- MOQ / scale calculator --- */
+/* --- MOQ Calculator --- */
+.moq-card { max-width: 940px; margin: 50px auto 0; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(28px, 4vw, 48px); }
+.moq-q { font-family: var(--display); font-size: clamp(20px,2vw,26px); letter-spacing: -0.01em; margin-bottom: 6px; }
+.moq-sub { font-size: 13.5px; color: var(--ink-mute); margin-bottom: 26px; }
+.moq-range-wrap { display: flex; align-items: center; gap: 22px; }
+.moq-range { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--forest), var(--brass-soft)); outline: none; }
+.moq-range::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--paper); border: 3px solid var(--forest); cursor: pointer; box-shadow: 0 4px 12px rgba(22,20,14,.2); }
+.moq-range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--paper); border: 3px solid var(--forest); cursor: pointer; }
+.moq-units { font-family: var(--display); font-size: clamp(32px,4vw,50px); color: var(--ink); line-height: 1; white-space: nowrap; }
+.moq-units .u { font-size: 15px; color: var(--ink-mute); font-family: var(--mono); }
+.moq-out { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+.moq-col { padding: 26px; border-radius: var(--radius); }
+.moq-col.trad { background: var(--cream-deep); border: 1px solid var(--line); }
+.moq-col.pnk { background: var(--forest-deep); color: var(--cream); }
+.moq-col .lbl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 12px; }
+.moq-col.pnk .lbl { color: var(--brass-soft); }
+.moq-col .big { font-family: var(--display); font-size: clamp(26px,3.2vw,38px); line-height: 1.05; }
+.moq-col .big .italic { color: var(--terracotta); font-style: italic; }
+.moq-col.pnk .big .italic { color: var(--brass-soft); }
+.moq-col .note { font-size: 13px; margin-top: 14px; line-height: 1.55; color: var(--ink-mute); }
+.moq-col.pnk .note { color: #C9C2AE; }
+.moq-verdict { margin-top: 26px; text-align: center; font-size: 15.5px; color: var(--ink-soft); }
+.moq-verdict strong { color: var(--forest); font-weight: 600; }
+@media (max-width: 700px) { .moq-out { grid-template-columns: 1fr; } .moq-range-wrap { flex-direction: column; align-items: stretch; gap: 14px; } }
 </style>
 </head>
 <body>
@@ -740,6 +766,40 @@
   </div>
 </section>
 
+<!-- ═══════════ MOQ CALCULATOR ═══════════ -->
+<section class="sec-cream-deep" id="calc">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">— Built to scale with you</div>
+      <h2 class="h1" style="margin-top:14px">Start at 500. Scale to <span class="italic">a million.</span></h2>
+      <p class="lede" style="margin-top:24px">
+        The legacy industry forces 5,000-unit minimums — so you gamble lakhs before your first sale. We start you wherever you are and scale you to a million on the very same line: no re-tooling, no re-formulating, no switching factories as you grow. Move the slider to picture your first run.
+      </p>
+    </div>
+    <div class="moq-card">
+      <div class="moq-q">What's a realistic first run for you?</div>
+      <div class="moq-sub">Drag to set it — there's no wrong answer.</div>
+      <div class="moq-range-wrap">
+        <input type="range" class="moq-range" id="moqRange" min="500" max="6000" step="100" value="1000" aria-label="Units needed">
+        <div class="moq-units"><span id="moqUnits">1,000</span> <span class="u">units</span></div>
+      </div>
+      <div class="moq-out">
+        <div class="moq-col trad">
+          <div class="lbl">Legacy manufacturer · 5,000 minimum</div>
+          <div class="big">Forced to commit to <span class="italic" id="tradOrder">5,000</span></div>
+          <div class="note">You’d pay for <span id="tradWaste">4,000</span> units before a single sale — about <strong id="tradMoney">₹4,80,000</strong> locked in stock on day one.</div>
+        </div>
+        <div class="moq-col pnk">
+          <div class="lbl">PN Kapoor · from 500</div>
+          <div class="big">Start with exactly <span class="italic" id="pnkOrder">1,000</span></div>
+          <div class="note">Then scale to 1M+ on the <em>same line</em> — same formula, same finish, 3-week re-orders. We grow when you grow.</div>
+        </div>
+      </div>
+      <div class="moq-verdict" id="moqVerdict">That’s <strong>₹4,80,000</strong> you keep for growth today — and a clear runway to a million when you’re ready.</div>
+    </div>
+  </div>
+</section>
+
 <!-- FINAL CTA -->
 <section class="final-cta sec-cloud-clay">
   <div class="container">
@@ -820,6 +880,29 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 20) navWrap.classList.add('scrolled');
   else navWrap.classList.remove('scrolled');
 });
+
+// MOQ calculator
+(function () {
+  var r = document.getElementById('moqRange');
+  if (!r) return;
+  var COST = 120; // indicative ₹ per unit
+  var num = function (n) { return n.toLocaleString('en-IN'); };
+  var money = function (n) { return '₹' + Math.round(n).toLocaleString('en-IN'); };
+  function upd() {
+    var u = +r.value;
+    var waste = Math.max(0, 5000 - u);
+    document.getElementById('moqUnits').textContent = num(u);
+    document.getElementById('tradOrder').textContent = num(Math.max(5000, u));
+    document.getElementById('tradWaste').textContent = num(waste);
+    document.getElementById('tradMoney').textContent = money(waste * COST);
+    document.getElementById('pnkOrder').textContent = num(u);
+    var v = document.getElementById('moqVerdict');
+    if (waste > 0) v.innerHTML = "That's <strong>" + money(waste * COST) + "</strong> you keep for growth today — and a clear runway to a million when you’re ready.";
+    else v.innerHTML = "At <strong>" + num(u) + " units</strong> you’re already scaling — same line, same formula, all the way to a million.";
+  }
+  r.addEventListener('input', upd);
+  upd();
+})();
 </script>
 <script src="reveal.js"></script>
 
