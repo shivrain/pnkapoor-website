@@ -474,3 +474,38 @@ footer {
 .mobile-menu .btn { margin-top: 8px; justify-content: center; width: 100%; }
 @media (max-width: 860px) { .nav-toggle { display: flex; } }
 
+
+
+/* ======================================================
+   MOBILE RESPONSIVE PASS — desktop design unchanged
+   ====================================================== */
+@media (max-width: 860px) {
+  .nav { padding: 12px 14px; gap: 12px; }
+  .brand-name { font-size: 20px; }
+  .brand-sub { font-size: 9px; letter-spacing: .14em; }
+  .nav-cta .btn-primary { padding: 10px 15px; font-size: 13px; }
+  .nav-cta .btn-primary svg { display: none; }
+}
+@media (max-width: 600px) {
+  section { padding: 54px 0; }
+  .page-hero { padding: 96px 0 44px; }
+  .section-head { margin-bottom: 36px; }
+  .h-display { font-size: clamp(30px, 9vw, 50px); }
+  .h1 { font-size: clamp(26px, 8vw, 42px); }
+  .h2 { font-size: clamp(23px, 7vw, 36px); }
+  .h3 { font-size: clamp(19px, 5vw, 26px); }
+  .lede { font-size: 15.5px; }
+  .ft-top { grid-template-columns: 1fr 1fr; gap: 30px; padding-bottom: 38px; }
+  .ft-wordmark { font-size: clamp(40px, 13vw, 90px); margin-top: 34px; }
+  footer { padding: 54px 0 32px; }
+  .final-cta-actions { flex-direction: column; }
+  .final-cta-actions .btn { width: 100%; }
+  .final-cta-inner { padding: 44px 24px; }
+  .crumb { margin-bottom: 22px; flex-wrap: wrap; }
+}
+@media (max-width: 420px) {
+  .ft-top { grid-template-columns: 1fr; }
+  .btn { padding: 12px 18px; }
+}
+
+@media (max-width: 860px) { .brand-sub { white-space: nowrap; } }

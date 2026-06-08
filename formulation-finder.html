@@ -167,6 +167,19 @@
 @media (max-width: 600px) {
   .finder-results { grid-template-columns: 1fr; }
 }
+
+/* ---- mobile ---- */
+@media (max-width: 760px) {
+  .finder-grid { grid-template-columns: 1fr; gap: 22px; }
+  .finder-panel { position: static; top: auto; }
+}
+@media (max-width: 480px) {
+  .formula-name { font-size: 18px; }
+  .finder-count { font-size: 20px; }
+  .formula-card { padding: 14px; }
+  .finder-summary { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .chip { font-size: 12px; }
+}
 </style>
 </head>
 <body>

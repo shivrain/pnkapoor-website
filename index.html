@@ -913,6 +913,26 @@
 .tnum strong { font-family: var(--display); font-size: 30px; font-weight: 400; color: var(--ink); letter-spacing: -0.01em; }
 .tnum span { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin-top: 7px; }
 @media (max-width: 760px) { .trust-row { flex-direction: column; align-items: flex-start; gap: 22px; } }
+
+/* ---- mobile ---- */
+@media (max-width: 600px) {
+  .hero { padding-top: 110px; }
+  .hero .h-display { font-size: clamp(30px, 8.5vw, 46px); }
+  .hero-sub { font-size: 15px; margin-top: 16px; }
+  .hero-grid { gap: 32px; }
+  .hero-actions { margin-top: 22px; }
+  .hero-meta { gap: 14px 18px; margin-top: 24px; }
+  .hero-meta-divider { display: none; }
+  .marquee-item { font-size: clamp(15px, 4.6vw, 24px); gap: 40px; }
+  .testi-c { width: 290px; min-height: 286px; padding: 26px 22px; }
+  .testi-c-brand { font-size: 24px; }
+  .world-wrap { padding: 20px; }
+  .world-grid { gap: 30px; }
+  .lead-wrap { gap: 36px; }
+  .lead-section a[href^="mailto:"] { font-size: 16px !important; word-break: break-word; }
+  .lead-section a[href^="tel:"] { font-size: 19px !important; }
+}
+@media (max-width: 400px) { .pkg-item { width: 178px; height: 134px; } }
 </style>
 </head>
 <body>

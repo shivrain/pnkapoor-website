@@ -260,6 +260,23 @@
 @media (max-width: 500px) {
   .cat-stats { grid-template-columns: 1fr; }
 }
+
+/* ---- mobile ---- */
+@media (max-width: 700px) {
+  .cat-sidenav { display: none; }
+  .cat-page-layout { grid-template-columns: 1fr; gap: 0; padding-top: 16px; padding-bottom: 16px; }
+}
+@media (max-width: 600px) {
+  .cat-section { padding: 40px 0; }
+  .cat-hero { gap: 26px; margin-bottom: 36px; }
+  .cat-details { gap: 18px; }
+  .detail-card { padding: 24px; }
+  .detail-card h4 { font-size: clamp(20px, 5.5vw, 26px); }
+  .subcat-name { font-size: 19px; }
+  .ing-tag { white-space: normal; }
+  .pack-item { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .stat-block .stat-val { font-size: clamp(24px, 7vw, 32px); }
+}
 </style>
 </head>
 <body>
