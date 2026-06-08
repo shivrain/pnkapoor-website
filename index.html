@@ -671,11 +671,11 @@
 /* --- Testimonial carousel (Trupeer-style) --- */
 .testimonial {
   overflow: hidden;
-  padding-bottom: clamp(80px, 10vw, 120px);
+  padding-bottom: clamp(48px, 6vw, 84px);
 }
 .testi-head {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 36px;
 }
 .testi-head .eyebrow { display: block; margin-bottom: 16px; }
 .testi-track-wrap {
@@ -921,7 +921,9 @@
   .hero-sub { font-size: 15px; margin-top: 16px; }
   .hero-grid { gap: 32px; }
   .hero-actions { margin-top: 22px; }
-  .hero-meta { gap: 14px 18px; margin-top: 24px; }
+  .hero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 10px; margin-top: 24px; text-align: center; }
+  .hero-meta-item { flex-direction: column; align-items: center; gap: 3px; font-size: 11px; line-height: 1.25; }
+  .hero-meta-item strong { font-size: 20px; }
   .hero-meta-divider { display: none; }
   .marquee-item { font-size: clamp(15px, 4.6vw, 24px); gap: 40px; }
   .testi-c { width: 290px; min-height: 286px; padding: 26px 22px; }
@@ -1313,7 +1315,7 @@
       <div class="pkg-item"><img src="images/pkg-treatment-pump.jpg" alt="Treatment pumps" loading="lazy"><span class="cap">Treatment pumps</span></div>
       <div class="pkg-item"><img src="images/pkg-lip-wand.jpg" alt="Lip-serum wands" loading="lazy"><span class="cap">Lip-serum wands</span></div>
       <div class="pkg-item"><img src="images/pkg-cube-jar.jpg" alt="Cube jars" loading="lazy"><span class="cap">Cube jars</span></div>
-      <div class="pkg-item"><img src="images/pkg-roller.jpg" alt="Roll-on rollers" loading="lazy"><span class="cap">Roll-on rollers</span></div>
+      <div class="pkg-item"><img src="images/pkg-roller.jpg" alt="Travel atomizers" loading="lazy"><span class="cap">Travel atomizers</span></div>
       <div class="pkg-item"><img src="images/pkg-shampoo.jpg" alt="Shampoo bottles" loading="lazy"><span class="cap">Shampoo bottles</span></div>
       <div class="pkg-item"><img src="images/pkg-range-trio.jpg" alt="Matching ranges" loading="lazy"><span class="cap">Matching ranges</span></div>
       <div class="pkg-item"><img src="images/pkg-balm-jar.jpg" alt="Balm jars" loading="lazy"><span class="cap">Balm jars</span></div>
@@ -1326,7 +1328,7 @@
       <div class="pkg-item" aria-hidden="true"><img src="images/pkg-treatment-pump.jpg" alt="" loading="lazy"><span class="cap">Treatment pumps</span></div>
       <div class="pkg-item" aria-hidden="true"><img src="images/pkg-lip-wand.jpg" alt="" loading="lazy"><span class="cap">Lip-serum wands</span></div>
       <div class="pkg-item" aria-hidden="true"><img src="images/pkg-cube-jar.jpg" alt="" loading="lazy"><span class="cap">Cube jars</span></div>
-      <div class="pkg-item" aria-hidden="true"><img src="images/pkg-roller.jpg" alt="" loading="lazy"><span class="cap">Roll-on rollers</span></div>
+      <div class="pkg-item" aria-hidden="true"><img src="images/pkg-roller.jpg" alt="" loading="lazy"><span class="cap">Travel atomizers</span></div>
       <div class="pkg-item" aria-hidden="true"><img src="images/pkg-shampoo.jpg" alt="" loading="lazy"><span class="cap">Shampoo bottles</span></div>
       <div class="pkg-item" aria-hidden="true"><img src="images/pkg-range-trio.jpg" alt="" loading="lazy"><span class="cap">Matching ranges</span></div>
       <div class="pkg-item" aria-hidden="true"><img src="images/pkg-balm-jar.jpg" alt="" loading="lazy"><span class="cap">Balm jars</span></div>
@@ -1476,133 +1478,133 @@
     <div class="testi-track">
       <!-- Pass 1 -->
       <div class="testi-c c-rose">
-        <div class="testi-c-brand">Clinique Botanic</div>
+        <div class="testi-c-brand">Botanical skincare brand</div>
         <div class="testi-c-quote">"PN Kapoor stopped feeling like a supplier and started feeling like a co-founder. They flagged formulation issues we hadn't even thought of."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Dr. Anjali Desai</span>
-          <span class="testi-c-role">Founder · Skincare brand</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-mint">
-        <div class="testi-c-brand">Lumière Co.</div>
+        <div class="testi-c-brand">D2C beauty brand</div>
         <div class="testi-c-quote">"Three other manufacturers rejected our 500-unit pilot. Chayan picked up on the first call and we shipped in 11 weeks. Now we're at 50,000 monthly."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Rhea Mathur</span>
-          <span class="testi-c-role">Co-founder · D2C beauty</span>
+          <span class="testi-c-role">Co-founder</span>
         </div>
       </div>
       <div class="testi-c c-cream">
-        <div class="testi-c-brand">Vellure Beauty</div>
+        <div class="testi-c-brand">Color cosmetics brand</div>
         <div class="testi-c-quote">"The R&amp;D team developed a tinted serum for 8 shade ranges of Indian skin tones that 4 other labs said was impossible at our MOQ."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Aanya Kapoor</span>
-          <span class="testi-c-role">Founder · Tinted range</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-sky">
-        <div class="testi-c-brand">Ottavio Naturals</div>
+        <div class="testi-c-brand">Men's grooming brand</div>
         <div class="testi-c-quote">"We came in with a rough idea on a napkin and left week one with a written feasibility report, indicative pricing, and a 12-week timeline."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Vikram Shah</span>
-          <span class="testi-c-role">Founder · Men's grooming</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-sand">
-        <div class="testi-c-brand">House of Saffron</div>
+        <div class="testi-c-brand">Heritage brand</div>
         <div class="testi-c-quote">"The same factory line that ran our 500-unit pilot now does our 75,000-unit monthly batches. No formulation drift. No margin shock."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Priya Nair</span>
-          <span class="testi-c-role">CEO · Heritage brand</span>
+          <span class="testi-c-role">CEO</span>
         </div>
       </div>
       <div class="testi-c c-lavender">
-        <div class="testi-c-brand">Dewdrop Skincare</div>
+        <div class="testi-c-brand">Clean beauty brand</div>
         <div class="testi-c-quote">"NDAs signed before the first technical call. That alone separates them from every other manufacturer we'd talked to in India."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Tanya Reddy</span>
-          <span class="testi-c-role">Founder · Clean beauty</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-blush">
-        <div class="testi-c-brand">The Botanist Lab</div>
+        <div class="testi-c-brand">Export-first brand</div>
         <div class="testi-c-quote">"Our customs clearance into UAE went through clean — first try. The documentation pack they handed us covered everything the regulator asked."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Imran Sheikh</span>
-          <span class="testi-c-role">Founder · GCC exports</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-sage">
-        <div class="testi-c-brand">Bloom &amp; Co.</div>
+        <div class="testi-c-brand">Haircare brand</div>
         <div class="testi-c-quote">"They've never tried to upsell us, never quoted vague pricing, never moved a deadline. Three years in, that's why we still don't shop manufacturers."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Meera Iyer</span>
-          <span class="testi-c-role">Founder · Haircare brand</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
 
       <!-- Pass 2 (duplicate for seamless loop) -->
       <div class="testi-c c-rose" aria-hidden="true">
-        <div class="testi-c-brand">Clinique Botanic</div>
+        <div class="testi-c-brand">Botanical skincare brand</div>
         <div class="testi-c-quote">"PN Kapoor stopped feeling like a supplier and started feeling like a co-founder. They flagged formulation issues we hadn't even thought of."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Dr. Anjali Desai</span>
-          <span class="testi-c-role">Founder · Skincare brand</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-mint" aria-hidden="true">
-        <div class="testi-c-brand">Lumière Co.</div>
+        <div class="testi-c-brand">D2C beauty brand</div>
         <div class="testi-c-quote">"Three other manufacturers rejected our 500-unit pilot. Chayan picked up on the first call and we shipped in 11 weeks. Now we're at 50,000 monthly."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Rhea Mathur</span>
-          <span class="testi-c-role">Co-founder · D2C beauty</span>
+          <span class="testi-c-role">Co-founder</span>
         </div>
       </div>
       <div class="testi-c c-cream" aria-hidden="true">
-        <div class="testi-c-brand">Vellure Beauty</div>
+        <div class="testi-c-brand">Color cosmetics brand</div>
         <div class="testi-c-quote">"The R&amp;D team developed a tinted serum for 8 shade ranges of Indian skin tones that 4 other labs said was impossible at our MOQ."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Aanya Kapoor</span>
-          <span class="testi-c-role">Founder · Tinted range</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-sky" aria-hidden="true">
-        <div class="testi-c-brand">Ottavio Naturals</div>
+        <div class="testi-c-brand">Men's grooming brand</div>
         <div class="testi-c-quote">"We came in with a rough idea on a napkin and left week one with a written feasibility report, indicative pricing, and a 12-week timeline."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Vikram Shah</span>
-          <span class="testi-c-role">Founder · Men's grooming</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-sand" aria-hidden="true">
-        <div class="testi-c-brand">House of Saffron</div>
+        <div class="testi-c-brand">Heritage brand</div>
         <div class="testi-c-quote">"The same factory line that ran our 500-unit pilot now does our 75,000-unit monthly batches. No formulation drift. No margin shock."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Priya Nair</span>
-          <span class="testi-c-role">CEO · Heritage brand</span>
+          <span class="testi-c-role">CEO</span>
         </div>
       </div>
       <div class="testi-c c-lavender" aria-hidden="true">
-        <div class="testi-c-brand">Dewdrop Skincare</div>
+        <div class="testi-c-brand">Clean beauty brand</div>
         <div class="testi-c-quote">"NDAs signed before the first technical call. That alone separates them from every other manufacturer we'd talked to in India."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Tanya Reddy</span>
-          <span class="testi-c-role">Founder · Clean beauty</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-blush" aria-hidden="true">
-        <div class="testi-c-brand">The Botanist Lab</div>
+        <div class="testi-c-brand">Export-first brand</div>
         <div class="testi-c-quote">"Our customs clearance into UAE went through clean — first try. The documentation pack they handed us covered everything the regulator asked."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Imran Sheikh</span>
-          <span class="testi-c-role">Founder · GCC exports</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
       <div class="testi-c c-sage" aria-hidden="true">
-        <div class="testi-c-brand">Bloom &amp; Co.</div>
+        <div class="testi-c-brand">Haircare brand</div>
         <div class="testi-c-quote">"They've never tried to upsell us, never quoted vague pricing, never moved a deadline. Three years in, that's why we still don't shop manufacturers."</div>
         <div class="testi-c-author">
           <span class="testi-c-name">Meera Iyer</span>
-          <span class="testi-c-role">Founder · Haircare brand</span>
+          <span class="testi-c-role">Founder</span>
         </div>
       </div>
     </div>

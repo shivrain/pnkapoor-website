@@ -180,6 +180,80 @@
   .finder-summary { flex-direction: column; align-items: flex-start; gap: 10px; }
   .chip { font-size: 12px; }
 }
+
+/* ===== Mobile-only collapsible Filters drawer ===== */
+/* Toggle button is hidden on desktop; panel behaves exactly as today (>760px). */
+.finder-toggle { display: none; }
+
+@media (max-width: 760px) {
+  /* Show the toggle, make it the first row of the finder grid */
+  .finder-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 13px 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    letter-spacing: -0.01em;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .2s, border-color .2s;
+  }
+  .finder-toggle:hover { border-color: var(--ink); }
+  .finder-toggle .finder-toggle-label { margin-right: auto; }
+  .finder-toggle .finder-toggle-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    margin-right: 2px;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: var(--radius-pill);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .finder-toggle .finder-toggle-count[hidden] { display: none; }
+  .finder-toggle .finder-toggle-caret { transition: transform .28s ease; flex-shrink: 0; color: var(--ink-mute); }
+  .finder-toggle[aria-expanded="true"] .finder-toggle-caret { transform: rotate(180deg); }
+
+  /* Collapsed by default: clip the panel to height 0, fade out, disable interaction */
+  .finder-panel {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    pointer-events: none;
+    transition: max-height .32s ease, opacity .24s ease,
+                padding-top .32s ease, padding-bottom .32s ease, border-width .32s ease;
+  }
+  /* Expanded state, toggled via JS on the panel */
+  .finder-panel.is-open {
+    max-height: 1600px; /* generous upper bound; worst-case content ~930px at 360px width */
+    opacity: 1;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-width: 1px;
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .finder-panel { transition: none; }
+  .finder-toggle .finder-toggle-caret { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -227,7 +301,13 @@
 <section class="finder">
   <div class="container">
     <div class="finder-grid">
-      <aside class="finder-panel">
+      <button class="finder-toggle" type="button" aria-expanded="false" aria-controls="finderPanel">
+        <svg class="finder-toggle-ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        <span class="finder-toggle-label">Filters</span>
+        <span class="finder-toggle-count" data-count="0" hidden>0</span>
+        <svg class="finder-toggle-caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <aside class="finder-panel" id="finderPanel">
         <div class="finder-group">
           <h4>Category <span class="count">6</span></h4>
           <div class="chip-row" data-group="category">
@@ -608,6 +688,63 @@ function clearAll() {
   document.querySelectorAll('.chip.active').forEach(c => c.classList.remove('active'));
   applyFilters();
 }
+
+/* ===== Mobile Filters drawer toggle ===== */
+(function () {
+  var toggle = document.querySelector('.finder-toggle');
+  var panel  = document.getElementById('finderPanel');
+  if (!toggle || !panel) return;
+
+  var countEl = toggle.querySelector('.finder-toggle-count');
+  var mq = window.matchMedia('(max-width: 760px)');
+
+  // Reflect the number of active chips onto the toggle's badge.
+  function refreshToggleCount() {
+    var n = document.querySelectorAll('.chip.active').length;
+    if (!countEl) return;
+    countEl.textContent = n;
+    countEl.setAttribute('data-count', n);
+    countEl.hidden = (n === 0);
+  }
+
+  function openPanel() {
+    panel.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+  function closePanel() {
+    panel.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', function () {
+    if (panel.classList.contains('is-open')) closePanel();
+    else openPanel();
+  });
+
+  // Keep the panel/aria sane when crossing the breakpoint:
+  // on desktop the CSS forces it visible, so clear mobile state.
+  function syncToViewport() {
+    if (!mq.matches) {
+      panel.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+  (mq.addEventListener ? mq.addEventListener('change', syncToViewport)
+                       : mq.addListener(syncToViewport));
+
+  // Refresh the badge whenever filters change (chips + Clear all).
+  // These listeners are registered AFTER the existing chip handler (line 600)
+  // and after the inline onclick="clearAll()", so they always read the
+  // post-toggle / post-reset .chip.active count.
+  document.querySelectorAll('.chip').forEach(function (chip) {
+    chip.addEventListener('click', refreshToggleCount);
+  });
+  var clearBtn = document.querySelector('.btn-tonal[onclick*="clearAll"]');
+  if (clearBtn) clearBtn.addEventListener('click', refreshToggleCount);
+
+  refreshToggleCount();
+  syncToViewport();
+})();
 </script>
 <script src="reveal.js"></script>
 
