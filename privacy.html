@@ -12,9 +12,11 @@
 <style>
   .legal-wrap { max-width: 820px; margin: 0 auto; padding: 150px 24px 110px; }
   .legal-wrap .eyebrow { display:block; margin-bottom: 14px; }
-  .legal-wrap h1 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 58px); line-height: 1.05; letter-spacing: -.01em; margin-bottom: 18px; }
-  .legal-note { border: 1px dashed var(--line); border-radius: 16px; padding: 28px 30px; background: var(--paper); color: var(--ink-mute); font-size: 15px; line-height: 1.7; }
-  .legal-note strong { color: var(--ink); }
+  .legal-wrap h1 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 58px); line-height: 1.05; letter-spacing: -.01em; margin-bottom: 26px; }
+  .legal-body { max-width: 760px; }
+  .legal-body p { margin-bottom: 18px; color: var(--ink); line-height: 1.78; }
+  .legal-body h2.lh { font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.2; margin: 32px 0 8px; color: var(--ink); }
+  .legal-updated { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 26px; }
 </style>
 </head>
 <body>
@@ -41,9 +43,24 @@
 <main class="legal-wrap">
   <span class="eyebrow">— Policy</span>
   <h1>Privacy Policy</h1>
-  <div class="legal-note">
-    <strong>Content to be added.</strong> The full Privacy Policy text will be imported here, verbatim, from the existing PN Kapoor website. Once provided, this page will display it in full.
-  </div>
+  <div class="legal-body">
+      <h2 class="lh">Comments</h2>
+      <p>We collect data from comment forms, including your IP address and browser user agent for spam detection.</p>
+      <h2 class="lh">Media</h2>
+      <p>When uploading images, avoid including embedded location data (EXIF GPS). Visitors can extract location information from the images.</p>
+      <h2 class="lh">Cookies</h2>
+      <p>If you leave a comment, you can opt to save your name, email, and website in cookies for convenience. These cookies last for one year. When visiting our login page, a temporary cookie checks if your browser accepts cookies. If you log in, several cookies will store your login info and display preferences, lasting up to two weeks. If you log out, these cookies will be removed. Editing or publishing articles saves a cookie with no personal data, indicating the post ID, and it expires after 1 day.</p>
+      <h2 class="lh">Embedded Content from Other Websites</h2>
+      <p>Articles on our site may include embedded content like videos or images. Embedded content from other websites behaves as if you visited those sites, potentially collecting data, using cookies, and tracking interactions, especially if you're logged into those sites.</p>
+      <h2 class="lh">Who We Share Your Data With</h2>
+      <p>If you request a password reset, your IP address will be included in the reset email.</p>
+      <h2 class="lh">How Long We Retain Your Data</h2>
+      <p>Comments and their metadata are retained indefinitely for easy approval of follow-up comments. Registered users' information is stored in their profile, which they can edit or delete (except for their username). Admins can also view and edit this data.</p>
+      <h2 class="lh">Your Data Rights</h2>
+      <p>If you have an account or have left comments, you can request an exported file of the personal data we hold, or request to have it erased. This doesn't apply to data we need for administrative, legal, or security reasons.</p>
+      <h2 class="lh">Where Your Data is Sent</h2>
+      <p>Visitor comments may be checked by an automated spam detection service.</p>
+      </div>
 </main>
 <footer>
   <div class="container">

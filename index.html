@@ -907,7 +907,8 @@
 .trust-row { display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
 .trust-certs { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .trust-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-mute); }
-.cert { font-family: var(--mono); font-size: 16px; font-weight: 600; letter-spacing: .04em; color: var(--ink); padding: 9px 18px; border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--paper); }
+.cert { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 16px; font-weight: 600; letter-spacing: .04em; color: var(--ink); padding: 8px 18px 8px 12px; border: 1px solid var(--line); border-radius: var(--radius-pill); background: var(--paper); }
+.cert-badge { width: 26px; height: 26px; object-fit: contain; display: block; }
 .trust-nums { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
 .tnum { display: flex; flex-direction: column; line-height: 1; }
 .tnum strong { font-family: var(--display); font-size: 30px; font-weight: 400; color: var(--ink); letter-spacing: -0.01em; }
@@ -1051,10 +1052,10 @@
     <div class="trust-row">
       <div class="trust-certs">
         <span class="trust-label">Our certifications</span>
-        <span class="cert">FDA</span>
-        <span class="cert">ISO</span>
-        <span class="cert">GMP</span>
-        <span class="cert">HALAL</span>
+        <span class="cert"><img class="cert-badge" src="images/cert-fda.png" alt="FDA certified" loading="lazy"> FDA</span>
+        <span class="cert"><img class="cert-badge" src="images/cert-iso.png" alt="ISO certified" loading="lazy"> ISO</span>
+        <span class="cert"><img class="cert-badge" src="images/cert-gmp.png" alt="GMP certified" loading="lazy"> GMP</span>
+        <span class="cert"><img class="cert-badge" src="images/cert-halal.png" alt="HALAL certified" loading="lazy"> HALAL</span>
       </div>
       <div class="trust-nums">
         <div class="tnum"><strong>1000+</strong><span>Formulations</span></div>
